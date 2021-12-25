@@ -4,30 +4,16 @@
       <!--  -->
       <!---->
       <div v-if="$store.getters.logueado">
-        <v-card flat class="mx-4 justify-center">
-          <v-avatar size="120">
-            <v-img src="https://thispersondoesnotexist.com/image"></v-img>
-          </v-avatar>
-
-          <v-card-title> {{ $store.getters.currentUser.nombre }} </v-card-title>
-
-          <v-card-subtitle>
-            {{ $store.getters.currentUser.apellidos }}</v-card-subtitle
-          >
-          <v-btn class="mb-4" color="primary" router to="/MiPerfil">
-            <span>Mi perfil</span>
-            <v-icon right>mdi-account-circle</v-icon>
-          </v-btn>
-          <v-btn
-            v-if="$store.getters.currentUser.esAdmin"
-            class="mb-4"
-            color="primary"
-            router
-            to="/Administracion"
-          >
-            <span>Administrar</span>
-            <v-icon right>mdi-book-edit</v-icon>
-          </v-btn>
+        <v-card class="ma-4 ml-7" width="200">
+          <div class="d-flex justify-center">
+            <v-avatar size="130">
+              <v-img src="https://thispersondoesnotexist.com/image"></v-img>
+            </v-avatar>
+          </div>
+          <div class="pl-7">
+            <div><h1>Rodrigo</h1></div>
+            <div><h2>López Suarez</h2></div>
+          </div>
         </v-card>
         <v-divider></v-divider>
         <v-list>
@@ -37,6 +23,7 @@
               :key="i"
               router
               :to="item.ruta"
+              @click="drawer = false"
             >
               <v-list-item-icon>
                 <v-icon v-text="item.icon"></v-icon>
@@ -52,19 +39,19 @@
       <div v-if="!$store.getters.logueado">
         <v-card v-if="!$store.getters.logueado" flat class="ma-4">
           <h3 class="font-weight-light grey lighten-2 pa-2">
-            Inicia sesión para acceder a tu perfil y comprar cartas
+            Inicia sesión para acceder a tu perfil y ver tus compras
           </h3>
         </v-card>
         <v-divider></v-divider>
 
         <v-list v-if="!$store.getters.logueado">
           <v-list-item-group v-model="selectedItem" color="primary">
-            <v-list-item router to="/">
+            <v-list-item router to="/" @click="drawer = false">
               <v-list-item-icon>
-                <v-icon>mdi-cards</v-icon>
+                <v-icon>mdi-liquor</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title>Colecciones</v-list-item-title>
+                <v-list-item-title>Bodegas</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list-item-group>
@@ -72,10 +59,28 @@
       </div>
     </v-navigation-drawer>
 
-    <v-app-bar app>
+    <v-app-bar app height="80">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title> <h2>Kiosco de Pokimons</h2> </v-toolbar-title>
+      <v-toolbar-title>
+        <v-card flat color="transparent" router to="/">
+          <!--<h1 class="font-weight-light">Phone REC·</h1>-->
+          <v-img src="../assets/Recurso6.png" width="550"> </v-img>
+        </v-card>
+      </v-toolbar-title>
+
+      <div class="pt-6 pl-16">
+        <v-autocomplete
+          filled
+          rounded
+          dense
+          append-icon="mdi-magnify"
+          label="Buscar"
+          :items="itemsBusqueda"
+          v-model="resBusqueda"
+        ></v-autocomplete>
+      </div>
+
       <v-btn
         v-if="$store.getters.logueado"
         color="primary"
@@ -99,7 +104,7 @@
         router
         to="/Login"
       >
-        <span>Sign In</span>
+        <span>LogIn</span>
         <v-icon right>mdi-exit-to-app</v-icon>
       </v-btn>
     </v-app-bar>
@@ -114,21 +119,33 @@ export default {
   data: () => ({
     selectedItem: null,
     drawer: false,
-    //isLogueado: $store.state.logueado,
+    
     items: [
-      { text: "Colecciones", icon: "mdi-cards", ruta: "/" },
-      //{ text: "Audience", icon: "mdi-account", ruta: "/Principal" },
       {
-        text: "Conseguir Puntos",
-        icon: "mdi-currency-usd",
-        ruta: "/ConseguirPuntos",
+        text: "Mi perfil",
+        icon: "mdi-account",
+        ruta: "/MiPerfil",
       },
+      { text: "Bodegas", icon: "mdi-liquor", ruta: "/" },
+      { text: "Cesta", icon: "mdi-cart", ruta: "/Cesta" },
     ],
-    btnAdministrar: {
-      text: "Administrar",
-      icon: "mdi-start",
-      ruta: "/Administracion",
-    },
+
+    itemsBusqueda: [
+      { text: "vinito" },
+      { text: "jamon" },
+      { text: "queso" },
+      { text: "vinito1" },
+      { text: "jamon1" },
+      { text: "queso1" },
+      { text: "vinito2" },
+      { text: "jamon2" },
+      { text: "queso2" },
+      { text: "vinito3" },
+      { text: "jamon3" },
+      { text: "queso3" },
+      
+    ],
+    resBusqueda: null,
   }),
   computed: {},
   methods: {

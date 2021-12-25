@@ -56,14 +56,7 @@
                           Recuperar contraseña
                         </v-btn>
 
-                        <v-btn
-                          right
-                          absolute
-                          color="success"
-                          @click="
-                            login();
-                            mandarDatos();
-                          "
+                        <v-btn right absolute color="success" @click="login()"
                           >Login</v-btn
                         >
                       </template>
@@ -141,89 +134,9 @@ export default {
     };
   },
   methods: {
-    mandarDatos: function () {
-      console.log("Nombre =", this.name);
-      console.log("Pass = ", this.password);
-
-      var query =
-        "MATCH (n:user) WHERE n.usuario='" +
-        this.name +
-        "' AND n.pass='" +
-        this.password +
-        "' RETURN n";
-
-      console.log(query);
-
-      var request = new XMLHttpRequest();
-
-      request.open("POST", "http://localhost:5000/runQuery", false); // `false` makes the request synchronous
-      request.setRequestHeader("Access-Control-Allow-Headers", "*");
-      request.setRequestHeader(
-        "Content-type",
-        "application/json; charset=utf-8"
-      );
-      request.setRequestHeader("Access-Control-Allow-Origin", "*");
-      request.send(JSON.stringify({ query: query }));
-
-      if (request.status === 200) {
-        var data = JSON.parse(request.responseText);
-
-        if (data.length == 0) {
-          this.snackbar = true;
-        } else {
-          var u = data[0];
-          var f = u.favsids.split(",");
-          var h = u.histids.split(",");
-
-          if (u.favsids != "") {
-            f.forEach((id) => {
-              u.favoritos.push(
-                this.peticion(
-                  "match (n:SmartPhone) where n.id='" + id + "' return n"
-                )
-              );
-            });
-          }
-          if (u.histids != "") {
-            h.forEach((id) => {
-              u.historial.push(
-                this.peticion(
-                  "match (n:SmartPhone) where n.id='" + id + "' return n"
-                )
-              );
-            });
-          }
-
-          this.$store.dispatch("setCurrentUserAction", u);
-          this.$store.dispatch("changeStateLogueadoAction");
-          this.$router.push({ path: "/" });
-        }
-
-        console.log(data[0]);
-      }
-    },
-
     login: function () {
-      console.log("loggeando");
-    },
-    peticion: function (query) {
-      var request = new XMLHttpRequest();
-
-      request.open("POST", "http://localhost:5000/runQuery", false); // `false` makes the request synchronous
-      request.setRequestHeader("Access-Control-Allow-Headers", "*");
-      request.setRequestHeader(
-        "Content-type",
-        "application/json; charset=utf-8"
-      );
-      request.setRequestHeader("Access-Control-Allow-Origin", "*");
-      request.send(JSON.stringify({ query: query }));
-
-      if (request.status === 200) {
-        var data = JSON.parse(request.responseText);
-        //console.log(data[0])
-
-        return data[0];
-      }
+      this.$store.dispatch("changeStateLogueadoAction");
+      this.$router.push({ path: "/" });
     },
   },
   components: {},
