@@ -1,15 +1,15 @@
 <template>
-  <v-main>
-    <v-container class="fill-height" fluid>
+  <v-main class="pt-0">
+    <v-container fluid>
       <v-row align="center" justify="center">
-        <v-col cols="12" sm="8" md="4">
+        <v-col>
           <v-card
-            width="600"
+            width="800"
             class="mx-auto mt-5"
             justify="center"
             color="grey lighten-3"
           >
-            <v-card-title>
+            <v-card-title class="d-flex justify-center">
               <h1 class="font-weight-medium">Registro</h1>
             </v-card-title>
             <v-card-text>
@@ -29,9 +29,23 @@
                   :rules="[rules.required, rules.counter]"
                 />
                 <v-text-field
-                  v-model="name"
-                  label="Usuario"
-                  prepend-icon="mdi-account-circle"
+                  v-model="direccion"
+                  label="Direccion"
+                  prepend-icon="mdi-home-city"        
+                  type="text"
+                  :rules="[rules.required, rules.counter]"
+                />
+                <v-text-field
+                  v-model="telefono"
+                  label="Telefono"
+                  prepend-icon="mdi-cellphone"        
+                  type="text"
+                  :rules="[rules.required, rules.counter]"
+                />
+                <v-text-field
+                  v-model="correo"
+                  label="Correo Electronico"
+                  prepend-icon="mdi-email"
                   type="text"
                   :rules="[rules.required, rules.counter]"
                 />
@@ -44,6 +58,77 @@
                   @click:append="showPassword = !showPassword"
                   :rules="[rules.required, rules.counter]"
                 />
+                <v-menu
+                  v-model="menu2"
+                  :close-on-content-click="false"
+                  :nudge-right="40"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="auto"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="date"
+                      label="Fecha de nacimiento"
+                      prepend-icon="mdi-calendar"
+                      readonly
+                      v-bind="attrs"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    v-model="date"
+                    @input="menu2 = false"
+                  ></v-date-picker>
+                </v-menu>
+                <v-text-field
+                  v-model="tarjetaCredito"
+                  label="Tarjeta de credito (opcional)"
+                  prepend-icon="mdi-credit-card-outline"
+                  type="text"
+                  :rules="[rules.required, rules.counter]"
+                />
+                 <v-row >
+                <v-col sm="6">
+                  <v-menu
+                    v-model="menu2"
+                    :close-on-content-click="false"
+                    :nudge-right="40"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        v-model="date"
+                        label="Fecha de caducidad (opcional)"
+                        prepend-icon="mdi-credit-card-outline"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      v-model="date"
+                      @input="menu2 = false"
+                    ></v-date-picker>
+                  </v-menu>
+                </v-col>
+                <v-col class="pl-5" sm="6">
+                    <v-text-field
+                      v-model="cvc"
+                      label="CVC"
+                      prepend-icon="mdi-credit-card-outline"
+                      v-on="on"
+                    ></v-text-field>
+                  </v-col>
+                 </v-row>
+                 <v-file-input
+                  show-size
+                  counter
+                  multiple
+                  label="Foto del DNI o pasaporte"
+                ></v-file-input>
               </v-form>
             </v-card-text>
 
@@ -62,9 +147,9 @@
 
     <!--:to="{ path: '/' }"-->
 
-    <v-footer>
+    <v-footer class="mt-5">
       <v-card-text class=".font-italic font-weight-bold text-center">
-        &copy;2021 — <strong>Phone REC</strong>
+        &copy;2021 — <strong>Bodegas Mediterraneas</strong>
       </v-card-text>
     </v-footer>
   </v-main>
