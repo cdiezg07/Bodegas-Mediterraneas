@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-main class="pt-0">
     <div class="pt-3">
       <v-carousel
         cycle
@@ -42,7 +42,9 @@
 
               <v-card-actions class="ml-2">
                 <div>
-                  <v-btn text color="success" outlined> visitar </v-btn>
+                  <v-btn text color="success" outlined router to="/Tienda">
+                    visitar
+                  </v-btn>
                 </div>
               </v-card-actions>
             </div></v-col
@@ -57,7 +59,7 @@
         </div>
       </v-card>
     </div>
-  </v-app>
+  </v-main>
 </template>
 
 <script>
@@ -142,5 +144,3 @@ export default {
 /*
 https://www.sitiosdeespana.es/articulo/las-15-mejores-bodegas-para-visitar-en-espana
 */
-
-
