@@ -1,5 +1,5 @@
 <template>
-  <v-main class="pt-0">
+  <v-app>
     <div class="pt-3">
       <v-carousel
         cycle
@@ -59,7 +59,7 @@
         </div>
       </v-card>
     </div>
-  </v-main>
+  </v-app>
 </template>
 
 <script>

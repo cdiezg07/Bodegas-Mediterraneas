@@ -44,6 +44,7 @@
             dense
             solo
             @change="print()"
+            class="selects"
           ></v-select></div
       ></v-row>
     </div>
@@ -53,9 +54,7 @@
           <v-card class="ma-2" height="400">
             <v-img :src="p.src" class="mt-1" height="250" contain></v-img>
 
-            <v-card-title>
-              <span>{{ p.nombre }}</span>
-            </v-card-title>
+            <v-card-title>{{ p.nombre }} </v-card-title>
             <v-card-subtitle class="pb-0">
               <span> {{ p.precio }}</span></v-card-subtitle
             >
@@ -68,11 +67,39 @@
         </v-col></v-row
       >
     </div>
-    <div v-if="selector == 'Eventos'" class="ml-11">
+    <div v-if="selector == 'Eventos'" class="">
       <v-slide-group show-arrows>
-        <v-slide-item v-for="(e, i) in eventos" :key="i">
+        <v-slide-item v-for="(e, i) in eventos" :key="i" class="ma-1 mr-2">
+          <v-card height="330" width="600" class="rounded-lg" id="card">
+            <div class="d-flex justify-start">
+              <v-avatar class="ma-3" size="300" tile>
+                <v-img :src="e.src" class="rounded-lg"></v-img>
+              </v-avatar>
+              <v-col cols="6"
+                ><div>
+                  <v-card-title
+                    class="text-h5 mr-2"
+                    v-text="e.nombre"
+                  ></v-card-title>
+
+                  <v-card-subtitle class="pb-0 mr-2">{{
+                    e.descripcion
+                  }}</v-card-subtitle>
+
+                  <v-card-actions class="ml-2">
+                    <div>
+                      <v-btn text color="success" outlined router to="/Evento">
+                        ver más
+                      </v-btn>
+                    </div>
+                  </v-card-actions>
+                </div></v-col
+              >
+            </div>
+          </v-card>
+          <!--
           <v-card class="ma-2">
-            <v-img :src="e.src" class="mt-1" height="250" contain></v-img>
+            <v-img :src="e.src" class="mt-1" height="550" contain></v-img>
 
             <v-card-title> {{ e.nombre }} </v-card-title>
             <div class="d-flex justify-center pb-3">
@@ -80,7 +107,7 @@
                 ver evento
               </v-btn>
             </div>
-          </v-card>
+          </v-card>-->
         </v-slide-item>
       </v-slide-group>
     </div>
@@ -95,7 +122,7 @@ export default {
 
   data: () => ({
     select: ["Productos", "Eventos"],
-    selector: "Productos",
+    selector: "Eventos",
 
     bodega: {
       src: "https://images.squarespace-cdn.com/content/v1/5a86b05bcf81e0af04936cc7/1615546391879-0GO55P7LCOE6YYKRJQZW/bodegas-arguaza-navarro-2w.jpg?format=1000w",
@@ -169,7 +196,28 @@ export default {
       },
     ],
 
-    eventos: [{}],
+    eventos: [
+      {
+        src: "https://arzuaganavarro.com/templates/yootheme/cache/cata-eae04710.jpeg",
+        nombre: "Taller de cata a cargo de nuestro equipo de sumillería.",
+        descripcion: "Taller de cata y degustación de nuestros vinos",
+      },
+      {
+        src: "https://arzuaganavarro.com/templates/yootheme/cache/barricas-0a498ee0.jpeg",
+        nombre: "Sensaciones enológicas",
+        descripcion: "Visita por el interior de las bodegas",
+      },
+      {
+        src: "https://arzuaganavarro.com/templates/yootheme/cache/copa-3e789739.jpeg",
+        nombre: "Descubriendo Arzuaga",
+        descripcion: "Visita al viñedo y las bodegas",
+      },
+      {
+        src: "https://arzuaganavarro.com/templates/yootheme/cache/CIERVOS-CATA-10327442.jpeg",
+        nombre: "Naturaleza en directo",
+        descripcion: "Visita guiada por los viñedos y reservas de caza",
+      },
+    ],
   }),
   methods: {
     print: function () {
@@ -178,3 +226,12 @@ export default {
   },
 };
 </script>
+<style>
+.v-card__text,
+.v-card__title {
+  word-break: normal; /* maybe !important  */
+}
+.selects {
+  width: 150px;
+}
+</style>
