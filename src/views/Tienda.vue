@@ -122,7 +122,7 @@ export default {
 
   data: () => ({
     select: ["Productos", "Eventos"],
-    selector: "Eventos",
+    selector: "Productos",
 
     bodega: {
       src: "https://images.squarespace-cdn.com/content/v1/5a86b05bcf81e0af04936cc7/1615546391879-0GO55P7LCOE6YYKRJQZW/bodegas-arguaza-navarro-2w.jpg?format=1000w",
