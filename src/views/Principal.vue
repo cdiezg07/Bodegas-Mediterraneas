@@ -1,12 +1,12 @@
 <template>
   <v-app>
-    <div class="pt-3">
+    <div class="pt-5 d-flex justify-center px-16">
       <v-carousel
         cycle
         show-arrows-on-hover
         hide-delimiter-background
         height="400"
-        class="rounded-lg"
+        class="rounded-lg flat"
       >
         <v-carousel-item
           v-for="(image, i) in imagesCarousel"
@@ -21,7 +21,15 @@
       v-for="(bodega, i) in bodegas"
       :key="i"
     >
-      <v-card height="230" width="1600" class="rounded-lg" id="card">
+      <v-card
+        height="230"
+        width="1600"
+        class="rounded-lg"
+        style="
+          background: #dedede;
+          box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+        "
+      >
         <div class="d-flex flex-no-wrap justify-space-between">
           <v-avatar class="ma-3" size="200" tile>
             <v-img :src="bodega.src" class="rounded-lg"></v-img>
@@ -42,7 +50,13 @@
 
               <v-card-actions class="ml-2">
                 <div>
-                  <v-btn text color="success" outlined router to="/Tienda">
+                  <v-btn
+                    text
+                    class="custom_button"
+                    
+                    router
+                    to="/Tienda"
+                  >
                     visitar
                   </v-btn>
                 </div>
@@ -70,10 +84,10 @@ export default {
 
   data: () => ({
     imagesCarousel: [
-      { src: "https://theluxonomist.es/wp-content/uploads/2019/10/bodega.jpg" },
       {
         src: "https://rutadelvinocigales.com/wp-content/uploads/2019/01/Bodegas-Concejo-1.jpg",
       },
+      { src: "https://theluxonomist.es/wp-content/uploads/2019/10/bodega.jpg" },
       {
         src: "https://s1.eestatic.com/2020/07/15/curiosidades/cuerpo-humano/dieta-salud-verano_505461235_155807843_1706x960.jpg",
       },

@@ -4,12 +4,10 @@
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="4">
-            <v-card
-              width="600"
-              class="mx-auto mt-5"
-              justify="center"
-              color="cardAnalisis"
-            >
+            <v-card width="600" class="mx-auto mt-5" justify="center" style="
+              background: #dedede;
+              box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+            ">
               <v-card-title>
                 <h1 class="font-weight-medium">Login</h1>
               </v-card-title>
@@ -56,12 +54,12 @@
                           Recuperar contraseña
                         </v-btn>
 
-                        <v-btn right absolute color="success" @click="login()"
+                        <v-btn right absolute class="custom_button" @click="login()"
                           >Login</v-btn
                         >
                       </template>
 
-                      <v-card>
+                      <v-card >
                         <v-list>
                           <v-list-item>
                             <v-list-item-content>
@@ -84,15 +82,18 @@
               </v-card-actions>
             </v-card>
             <v-spacer class="pt-2"></v-spacer>
-            <v-card width="600" class="mx-auto">
+            <v-card width="600" class="mx-auto" style="
+              background: #dedede;
+              box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+            ">
               <v-card-title
-                style="font-size: 20px; padding-top: 15px; padding-left: 10px"
+                style="font-size: 20px; padding-top: 15px; padding-left: 10px "
                 >¿Aún no está registrado?
                 <v-btn
                   right
                   absolute
-                  color="blue"
-                  class="white--text"
+                  
+                  class="custom_button"
                   route
                   to="/Registro"
                   >Registrarse</v-btn

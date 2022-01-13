@@ -7,7 +7,10 @@
             width="800"
             class="mx-auto mt-5"
             justify="center"
-            color="grey lighten-3"
+            style="
+              background: #dedede;
+              box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+            "
           >
             <v-card-title class="d-flex justify-center">
               <h1 class="font-weight-medium">Registro</h1>
@@ -31,14 +34,14 @@
                 <v-text-field
                   v-model="direccion"
                   label="Direccion"
-                  prepend-icon="mdi-home-city"        
+                  prepend-icon="mdi-home-city"
                   type="text"
                   :rules="[rules.required, rules.counter]"
                 />
                 <v-text-field
                   v-model="telefono"
                   label="Telefono"
-                  prepend-icon="mdi-cellphone"        
+                  prepend-icon="mdi-cellphone"
                   type="text"
                   :rules="[rules.required, rules.counter]"
                 />
@@ -88,33 +91,33 @@
                   type="text"
                   :rules="[rules.required, rules.counter]"
                 />
-                 <v-row >
-                <v-col sm="6">
-                  <v-menu
-                    v-model="menu2"
-                    :close-on-content-click="false"
-                    :nudge-right="40"
-                    transition="scale-transition"
-                    offset-y
-                    min-width="auto"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
+                <v-row>
+                  <v-col sm="6">
+                    <v-menu
+                      v-model="menu2"
+                      :close-on-content-click="false"
+                      :nudge-right="40"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="date"
+                          label="Fecha de caducidad (opcional)"
+                          prepend-icon="mdi-credit-card-outline"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker
                         v-model="date"
-                        label="Fecha de caducidad (opcional)"
-                        prepend-icon="mdi-credit-card-outline"
-                        readonly
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                    <v-date-picker
-                      v-model="date"
-                      @input="menu2 = false"
-                    ></v-date-picker>
-                  </v-menu>
-                </v-col>
-                <v-col class="pl-5" sm="6">
+                        @input="menu2 = false"
+                      ></v-date-picker>
+                    </v-menu>
+                  </v-col>
+                  <v-col class="pl-5" sm="6">
                     <v-text-field
                       v-model="cvc"
                       label="CVC"
@@ -122,8 +125,8 @@
                       v-on="on"
                     ></v-text-field>
                   </v-col>
-                 </v-row>
-                 <v-file-input
+                </v-row>
+                <v-file-input
                   show-size
                   counter
                   multiple
@@ -134,7 +137,9 @@
 
             <v-card-actions>
               <template>
-                <v-btn color="primary" @click="mandarDatos()">Registro</v-btn>
+                <v-btn class="mb-2 custom_button" block @click="mandarDatos()"
+                  >Registro</v-btn
+                >
                 <v-snackbar v-model="snackbar" :timeout="2000">
                   Registrado
                 </v-snackbar>
@@ -185,45 +190,8 @@ export default {
 
     mandarDatos: function () {
       console.log("entrado");
-      var query = "";
-      query +=
-        "CREATE (n:user {nombre: '" +
-        this.nombre +
-        "', apellidos: '" +
-        this.apellidos +
-        "', usuario: '" +
-        this.name +
-        "', pass: '" +
-        this.password +
-        "', historial:[], favoritos:[], histids:'', favsids:''}) RETURN n";
 
-      console.log("ejecutando " + query);
-
-      var request = new XMLHttpRequest();
-
-      request.open("POST", "http://localhost:5000/registrar", false); // `false` makes the request synchronous
-      request.setRequestHeader("Access-Control-Allow-Headers", "*");
-      request.setRequestHeader(
-        "Content-type",
-        "application/json; charset=utf-8"
-      );
-      request.setRequestHeader("Access-Control-Allow-Origin", "*");
-      request.send(
-        JSON.stringify({
-          query: query,
-        })
-      );
-
-      if (request.status === 200) {
-        var data = JSON.parse(request.responseText);
-        //devolver el user meterlo en la store y volver a login
-        console.log("hecho");
-
-        console.log(data);
-        this.snackbar = true;
-
-        this.$router.push({ path: "/Login" });
-      }
+      this.$router.push({ path: "/Login" });
     },
   },
   components: {},

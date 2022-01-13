@@ -20,6 +20,53 @@ export default {
 };
 </script>
 
+<style>
+.v-card__text,
+.v-card__title {
+  word-break: normal; /* maybe !important  */
+}
+.selects {
+  width: 150px;
+}
+
+#app {
+  background: #d9d9d9;
+}
+
+.flat {
+  background: #dedede;
+  box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+  
+}
+
+.custom_button {
+  transition: all 0.3s;
+  background: #dbdbdb;
+  box-shadow: 3px 3px 8px #b4b4b4, -3px -3px 8px #ffffff;
+}
+.custom_button:hover {
+  border: 1px solid rgb(255, 255, 255);
+  background: rgb(255, 255, 255);
+}
+.custom_button:active {
+  color: #666;
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+}
+.custom_button1 {
+  transition: all 0.3s;
+  background: #dbdbdb;
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+}
+.custom_button1:hover {
+  border: 1px solid rgb(255, 255, 255);
+  background: rgb(255, 255, 255);
+}
+.custom_button1:active {
+  color: #666;
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+}
+</style>
+
 <!--
 <style>
 #app {
