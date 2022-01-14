@@ -77,13 +77,13 @@
                     box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
                   "
                 >
-                  <v-btn min-width="4" width="4" text
-                    ><h2 class="" @click="decrementar()">-</h2></v-btn
+                  <v-btn min-width="4" width="4" text @click="decrementar()"
+                    ><h2 class="">-</h2></v-btn
                   >
 
                   <h3 class="mt-1 mx-5">{{ cantidad }}</h3>
-                  <v-btn min-width="4" width="4" text
-                    ><h2 class="" @click="incrementar()">+</h2></v-btn
+                  <v-btn min-width="4" width="4" text @click="incrementar()"
+                    ><h2 class="">+</h2></v-btn
                   >
                 </div>
 
@@ -102,10 +102,14 @@
       v-for="(opinion, i) in opiniones"
       :key="i"
     >
-      <v-card width="1600" class="rounded-lg" style="
-              background: #dedede;
-              box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
-            ">
+      <v-card
+        width="1600"
+        class="rounded-lg"
+        style="
+          background: #dedede;
+          box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+        "
+      >
         <v-card-title class="pt-1">{{ opinion.nombre }}</v-card-title>
         <v-card-subtitle> {{ opinion.fecha }}</v-card-subtitle>
         <div class="pl-4 pr-3 pb-1">{{ opinion.opinion }}</div>
