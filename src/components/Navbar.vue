@@ -1,11 +1,16 @@
 <template>
   <v-main>
-    <v-navigation-drawer v-model="drawer" app>
-      <!--  -->
+    <v-navigation-drawer v-model="drawer" class="rounded-lg" app style="
+                    background: #dedede;
+                    box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+                  ">
       <!---->
       <div v-if="$store.getters.logueado">
-        <v-card class="ma-4 ml-7" width="200">
-          <div class="d-flex justify-center">
+        <v-card class="ma-4 ml-7" width="200" style="
+                    background: #dedede;
+                    box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+                  ">
+          <div class="d-flex justify-center pa-2">
             <v-avatar size="130">
               <v-img src="https://thispersondoesnotexist.com/image"></v-img>
             </v-avatar>
@@ -23,7 +28,7 @@
               :key="i"
               router
               :to="item.ruta"
-              @click="drawer = false"
+              @click="drawer = false" class="custom_button my-4"
             >
               <v-list-item-icon>
                 <v-icon v-text="item.icon"></v-icon>
@@ -37,7 +42,10 @@
       </div>
 
       <div v-if="!$store.getters.logueado">
-        <v-card v-if="!$store.getters.logueado" flat class="ma-4">
+        <v-card v-if="!$store.getters.logueado" class="ma-4" style="
+                    background: #dedede;
+                    box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+                  ">
           <h3 class="font-weight-light grey lighten-2 pa-2">
             Inicia sesión para acceder a tu perfil y ver tus compras
           </h3>
@@ -46,7 +54,7 @@
 
         <v-list v-if="!$store.getters.logueado">
           <v-list-item-group v-model="selectedItem" color="primary">
-            <v-list-item router to="/" @click="drawer = false">
+            <v-list-item router to="/" @click="drawer = false" class="custom_button">
               <v-list-item-icon>
                 <v-icon>mdi-liquor</v-icon>
               </v-list-item-icon>
@@ -59,7 +67,8 @@
       </div>
     </v-navigation-drawer>
 
-    <v-app-bar app height="80">
+    <v-app-bar app height="80"  style=" 
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>
@@ -69,7 +78,7 @@
         </v-card>
       </v-toolbar-title>
 
-      <div class="pt-6 pl-16">
+      <div class="pt-2 pl-16">
         <v-autocomplete
           filled
           rounded
@@ -78,6 +87,8 @@
           label="Buscar"
           :items="itemsBusqueda"
           v-model="resBusqueda"
+           style="background: #dbdbdb; height: 50px;
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;"
         ></v-autocomplete>
       </div>
 
@@ -90,8 +101,10 @@
         "
         absolute
         right
+        text
         router
         to="/"
+        class="custom_button"
       >
         <span>Sign Out</span>
         <v-icon right>mdi-exit-to-app</v-icon>
@@ -101,8 +114,10 @@
         absolute
         right
         color="primary"
+        text
         router
         to="/Login"
+        class="custom_button"
       >
         <span>LogIn</span>
         <v-icon right>mdi-exit-to-app</v-icon>
