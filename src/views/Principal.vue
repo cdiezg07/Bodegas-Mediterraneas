@@ -1,78 +1,150 @@
 <template>
-  <v-app>
-    <div class="pt-5 d-flex justify-center px-16">
-      <v-carousel
-        cycle
-        show-arrows-on-hover
-        hide-delimiter-background
-        height="400"
-        class="rounded-lg flat"
+  <v-app class="ma-0 pa-0">
+    <div v-if="!$store.getters.darkMode" style="background: #d9d9d9">
+      <div class="pt-5 d-flex justify-center px-16">
+        <v-carousel
+          cycle
+          show-arrows-on-hover
+          hide-delimiter-background
+          height="400"
+          class="rounded-lg flat"
+        >
+          <v-carousel-item
+            v-for="(image, i) in imagesCarousel"
+            :key="i"
+            :src="image.src"
+          ></v-carousel-item>
+        </v-carousel>
+      </div>
+
+      <div
+        class="pt-9 d-flex justify-center"
+        v-for="(bodega, i) in bodegas"
+        :key="i"
       >
-        <v-carousel-item
-          v-for="(image, i) in imagesCarousel"
-          :key="i"
-          :src="image.src"
-        ></v-carousel-item>
-      </v-carousel>
+        <v-card
+          height="230"
+          width="1600"
+          class="rounded-lg"
+          style="
+            background: #dedede;
+            box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+          "
+        >
+          <div class="d-flex flex-no-wrap justify-space-between">
+            <v-avatar class="ma-3" size="200" tile>
+              <v-img :src="bodega.src" class="rounded-lg"></v-img>
+            </v-avatar>
+            <v-col cols="3"
+              ><div>
+                <v-card-title
+                  class="text-h5"
+                  v-text="bodega.nombre"
+                ></v-card-title>
+
+                <v-card-subtitle class="pb-0 body-1">{{
+                  bodega.localizacion
+                }}</v-card-subtitle>
+                <v-card-subtitle class="pt-0 body-1">{{
+                  bodega.provincia
+                }}</v-card-subtitle>
+
+                <v-card-actions class="ml-2">
+                  <div>
+                    <v-btn text class="custom_button" router to="/Tienda">
+                      visitar
+                    </v-btn>
+                  </div>
+                </v-card-actions>
+              </div></v-col
+            >
+            <v-col>
+              <div>
+                <v-card-text class=" body-1">
+                  {{ bodega.descripcion }}
+                </v-card-text>
+              </div>
+            </v-col>
+          </div>
+        </v-card>
+      </div>
+    </div>
+    <div v-if="$store.getters.darkMode" style="background: #292929;">
+      <div class="pt-5 d-flex justify-center px-16">
+        <v-carousel
+          cycle
+          show-arrows-on-hover
+          hide-delimiter-background
+          height="400"
+          class="rounded-lg"
+          style="
+            background: #292929;
+            box-shadow:  5px 5px 10px #1a1a1a,-5px -5px 10px #383838;
+             
+          "
+        >
+          <v-carousel-item
+            v-for="(image, i) in imagesCarousel"
+            :key="i"
+            :src="image.src"
+          ></v-carousel-item>
+        </v-carousel>
+      </div>
+
+      <div
+        class="pt-9 d-flex justify-center"
+        v-for="(bodega, i) in bodegas"
+        :key="i"
+      >
+        <v-card
+          height="230"
+          width="1600"
+          class="rounded-lg"
+          style="
+            background: #292929;
+            box-shadow:  5px 5px 10px #1a1a1a,-5px -5px 10px #383838;
+          "
+        >
+          <div class="d-flex flex-no-wrap justify-space-between">
+            <v-avatar class="ma-3" size="200" tile>
+              <v-img :src="bodega.src" class="rounded-lg"></v-img>
+            </v-avatar>
+            <v-col cols="3"
+              ><div>
+                <v-card-title
+                  class="text-h5 grey--text text--lighten-2"
+                  v-text="bodega.nombre"
+                ></v-card-title>
+
+                <v-card-subtitle class="pb-0 grey--text body-1">{{
+                  bodega.localizacion
+                }}</v-card-subtitle>
+                <v-card-subtitle class="pt-0 grey--text body-1">{{
+                  bodega.provincia
+                }}</v-card-subtitle>
+
+                <v-card-actions class="ml-2">
+                  <div>
+                    <v-btn text class="custom_buttonb grey--text" router to="/Tienda">
+                      visitar
+                    </v-btn>
+                  </div>
+                </v-card-actions>
+              </div></v-col
+            >
+            <v-col>
+              <div>
+                <v-card-text class="body-1 grey--text text--lighten-1">
+                  {{ bodega.descripcion }}
+                </v-card-text>
+              </div>
+            </v-col>
+          </div>
+        </v-card>
+      </div>
     </div>
 
-    <div
-      class="pt-9 d-flex justify-center"
-      v-for="(bodega, i) in bodegas"
-      :key="i"
-    >
-      <v-card
-        height="230"
-        width="1600"
-        class="rounded-lg"
-        style="
-          background: #dedede;
-          box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
-        "
-      >
-        <div class="d-flex flex-no-wrap justify-space-between">
-          <v-avatar class="ma-3" size="200" tile>
-            <v-img :src="bodega.src" class="rounded-lg"></v-img>
-          </v-avatar>
-          <v-col cols="3"
-            ><div>
-              <v-card-title
-                class="text-h5"
-                v-text="bodega.nombre"
-              ></v-card-title>
-
-              <v-card-subtitle class="pb-0">{{
-                bodega.localizacion
-              }}</v-card-subtitle>
-              <v-card-subtitle class="pt-0">{{
-                bodega.provincia
-              }}</v-card-subtitle>
-
-              <v-card-actions class="ml-2">
-                <div>
-                  <v-btn
-                    text
-                    class="custom_button"
-                    
-                    router
-                    to="/Tienda"
-                  >
-                    visitar
-                  </v-btn>
-                </div>
-              </v-card-actions>
-            </div></v-col
-          >
-          <v-col>
-            <div>
-              <v-card-text>
-                {{ bodega.descripcion }}
-              </v-card-text>
-            </div>
-          </v-col>
-        </div>
-      </v-card>
-    </div>
+    
   </v-app>
 </template>
 

@@ -1,279 +1,467 @@
 <template>
-  <v-app class="pt-5">
-    <div class="d-flex justify-center">
-      <v-card
-        height="750"
-        width="1800"
-        class="rounded-lg"
-        style="
-          background: #dedede;
-          box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
-        "
-      >
-        <div>
-          <v-row align="start" no-gutters>
-            <div v-for="(src, i) in srcs" :key="i" class="ma-4 pl-8">
-              <v-col>
-                <v-img
-                  height="300"
-                  max-width="500"
-                  :src="src"
-                  class="rounded-lg"
-                  style="
-                    background: #dedede;
-                    box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
-                  "
-                ></v-img>
-              </v-col>
-            </div>
-          </v-row>
-        </div>
-
-        <div class="pl-16 pt-3">
-          <v-row class="pl-8">
-            <h1 class="pl-2">{{ evento.bodega }}</h1>
-          </v-row>
-        </div>
-        <div class="pl-16 pt-6">
-          <v-row class="pl-8">
-            <h2 class="pl-2">{{ evento.nombre }}</h2>
-          </v-row>
-        </div>
-        <div class="pl-16 pt-9">
-          <v-row class="pl-8">
-            <v-rating
-              hover
-              half-increments
-              length="5"
-              size="30"
-              value="4.5"
-              background-color="orange lighten-3"
-              color="orange"
-            ></v-rating>
-            <h3 class="pt-3">4.2</h3>
-            <h3 class="pt-3">(153 valoraciones)</h3>
-          </v-row>
-        </div>
-
-
-
-           <div class="pl-15 mt-12">
-                <v-row>
-                 
-                  <v-card v-for="(p, i) in descripciones" :key="i" 
-                    class="ma-3"
-                    height="150"
-                    width="400"
+  <v-app>
+    <div
+      v-if="!$store.getters.darkMode"
+      style="background: #d9d9d9"
+      class="pt-9"
+    >
+      <div class="d-flex justify-center">
+        <v-card
+          height="750"
+          width="1800"
+          class="rounded-lg"
+          style="
+            background: #dedede;
+            box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+          "
+        >
+          <div>
+            <v-row align="start" no-gutters>
+              <div v-for="(src, i) in srcs" :key="i" class="ma-4 pl-8">
+                <v-col>
+                  <v-img
+                    height="300"
+                    max-width="500"
+                    :src="src"
+                    class="rounded-lg"
                     style="
                       background: #dedede;
                       box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
                     "
-                  >
-                    <v-card-title class="pt-0">
-                      <v-icon
-                        v-text="p.icon"
-                        large
-                        class="d-flex justify-center pt-2 pr-2"
-                      ></v-icon>
-                      <h4>{{ p.nombre }}</h4>
-                    </v-card-title>
-                    <v-card-subtitle class="pl-15">
-                      {{ p.desc }}</v-card-subtitle
+                  ></v-img>
+                </v-col>
+              </div>
+            </v-row>
+          </div>
+
+          <div class="pl-16 pt-3">
+            <v-row class="pl-8">
+              <h1 class="pl-2">{{ evento.bodega }}</h1>
+            </v-row>
+          </div>
+          <div class="pl-16 pt-6">
+            <v-row class="pl-8">
+              <h2 class="pl-2">{{ evento.nombre }}</h2>
+            </v-row>
+          </div>
+          <div class="pl-16 pt-9">
+            <v-row class="pl-8">
+              <v-rating
+                hover
+                half-increments
+                length="5"
+                size="30"
+                value="4.5"
+                background-color="orange lighten-3"
+                color="orange"
+              ></v-rating>
+              <h3 class="pt-3">4.2</h3>
+              <h3 class="pt-3">(153 valoraciones)</h3>
+            </v-row>
+          </div>
+
+          <div class="pl-15 mt-12">
+            <v-row>
+              <v-card
+                v-for="(p, i) in descripciones"
+                :key="i"
+                class="ma-3"
+                height="150"
+                width="400"
+                style="
+                  background: #dedede;
+                  box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+                "
+              >
+                <v-card-title class="pt-0">
+                  <v-icon
+                    v-text="p.icon"
+                    large
+                    class="d-flex justify-center pt-2 pr-2"
+                  ></v-icon>
+                  <h4>{{ p.nombre }}</h4>
+                </v-card-title>
+                <v-card-subtitle class="pl-15 body-1"> {{ p.desc }}</v-card-subtitle>
+              </v-card>
+            </v-row>
+          </div>
+        </v-card>
+      </div>
+
+      <div class="d-flex justify-center">
+        <v-card
+          height="1000"
+          width="1800"
+          class="rounded-lg mt-6"
+          style="
+            background: #dedede;
+            box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+          "
+        >
+          <h2 class="pl-9 pt-4 py-3">
+            <v-icon large>mdi-calendar-month-outline</v-icon>
+            Hacer reserva
+          </h2>
+
+          <div class="pa-10 pt-4 rounded-lg">
+            <v-row class="fill-height">
+              <v-col>
+                <v-sheet height="64">
+                  <v-toolbar flat>
+                    <v-btn
+                      outlined
+                      class="mr-4"
+                      color="grey darken-2"
+                      @click="setToday"
                     >
-                  </v-card>
-                </v-row>
-            
-                            </div>
+                      Today
+                    </v-btn>
+                    <v-btn fab text small color="grey darken-2" @click="prev">
+                      <v-icon small> mdi-chevron-left </v-icon>
+                    </v-btn>
+                    <v-btn fab text small color="grey darken-2" @click="next">
+                      <v-icon small> mdi-chevron-right </v-icon>
+                    </v-btn>
+                    <v-toolbar-title v-if="$refs.calendar">
+                      {{ $refs.calendar.title }}
+                    </v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-menu bottom right>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          outlined
+                          color="grey darken-2"
+                          v-bind="attrs"
+                          v-on="on"
+                        >
+                          <span>{{ typeToLabel[type] }}</span>
+                          <v-icon right> mdi-menu-down </v-icon>
+                        </v-btn>
+                      </template>
+                      <v-list>
+                        <v-list-item @click="type = 'day'">
+                          <v-list-item-title>Day</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item @click="type = 'week'">
+                          <v-list-item-title>Week</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item @click="type = 'month'">
+                          <v-list-item-title>Month</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item @click="type = '4day'">
+                          <v-list-item-title>4 days</v-list-item-title>
+                        </v-list-item>
+                      </v-list>
+                    </v-menu>
+                  </v-toolbar>
+                </v-sheet>
+                <v-sheet height="800">
+                  <v-calendar
+                    ref="calendar"
+                    v-model="focus"
+                    color="primary"
+                    :events="events"
+                    :event-color="getEventColor"
+                    :type="type"
+                    @click:event="showEvent"
+                    @click:more="viewDay"
+                    @click:date="viewDay"
+                    @change="updateRange"
+                  ></v-calendar>
+                  <v-menu
+                    v-model="selectedOpen"
+                    :close-on-content-click="false"
+                    :activator="selectedElement"
+                    offset-x
+                  >
+                    <v-card color="grey lighten-4" min-width="350px" flat>
+                      <v-toolbar :color="selectedEvent.color" dark>
+                        <v-btn icon>
+                          <v-icon>mdi-pencil</v-icon>
+                        </v-btn>
+                        <v-toolbar-title
+                          v-html="selectedEvent.name"
+                        ></v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-btn icon>
+                          <v-icon>mdi-heart</v-icon>
+                        </v-btn>
+                        <v-btn icon>
+                          <v-icon>mdi-dots-vertical</v-icon>
+                        </v-btn>
+                      </v-toolbar>
+                      <v-card-text>
+                        <span v-html="selectedEvent.details"></span>
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-btn
+                          text
+                          color="secondary"
+                          @click="selectedOpen = false"
+                        >
+                          Cancel
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-menu>
+                </v-sheet>
+              </v-col>
+            </v-row>
+          </div>
+        </v-card>
+      </div>
 
-
-
-
-      </v-card>
-
-    </div>
-    
- 
-    <div class="d-flex justify-center">
-
-    <v-card
-        height="1000"
-        width="1800"
-        class="rounded-lg mt-6"
-        style="
-          background: #dedede;
-          box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
-        "
-      > <h2 class="pl-9 pt-4 py-3">
-                <v-icon large>mdi-calendar-month-outline</v-icon>
-                Hacer reserva
-              </h2>
-
-        
-
-
-
-       <div class="pa-10 pt-4 rounded-lg">
-     
-  <v-row class="fill-height">
-    <v-col>
-      <v-sheet height="64">
-        <v-toolbar
-          flat
-        >
-          <v-btn
-            outlined
-            class="mr-4"
-            color="grey darken-2"
-            @click="setToday"
-          >
-            Today
-          </v-btn>
-          <v-btn
-            fab
-            text
-            small
-            color="grey darken-2"
-            @click="prev"
-          >
-            <v-icon small>
-              mdi-chevron-left
-            </v-icon>
-          </v-btn>
-          <v-btn
-            fab
-            text
-            small
-            color="grey darken-2"
-            @click="next"
-          >
-            <v-icon small>
-              mdi-chevron-right
-            </v-icon>
-          </v-btn>
-          <v-toolbar-title v-if="$refs.calendar">
-            {{ $refs.calendar.title }}
-          </v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-menu
-            bottom
-            right
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                outlined
-                color="grey darken-2"
-                v-bind="attrs"
-                v-on="on"
-              >
-                <span>{{ typeToLabel[type] }}</span>
-                <v-icon right>
-                  mdi-menu-down
-                </v-icon>
-              </v-btn>
-            </template>
-            <v-list>
-              <v-list-item @click="type = 'day'">
-                <v-list-item-title>Day</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = 'week'">
-                <v-list-item-title>Week</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = 'month'">
-                <v-list-item-title>Month</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = '4day'">
-                <v-list-item-title>4 days</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </v-toolbar>
-      </v-sheet>
-      <v-sheet height="800">
-        <v-calendar
-          ref="calendar"
-          v-model="focus"
-          color="primary"
-          :events="events"
-          :event-color="getEventColor"
-          :type="type"
-          @click:event="showEvent"
-          @click:more="viewDay"
-          @click:date="viewDay"
-          @change="updateRange"
-        ></v-calendar>
-        <v-menu
-          v-model="selectedOpen"
-          :close-on-content-click="false"
-          :activator="selectedElement"
-          offset-x
-        >
-          <v-card
-            color="grey lighten-4"
-            min-width="350px"
-            flat
-          >
-            <v-toolbar
-              :color="selectedEvent.color"
-              dark
-            >
-              <v-btn icon>
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn>
-              <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-              <v-spacer></v-spacer>
-              <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
-              </v-btn>
-              <v-btn icon>
-                <v-icon>mdi-dots-vertical</v-icon>
-              </v-btn>
-            </v-toolbar>
-            <v-card-text>
-              <span v-html="selectedEvent.details"></span>
-            </v-card-text>
-            <v-card-actions>
-              <v-btn
-                text
-                color="secondary"
-                @click="selectedOpen = false"
-              >
-                Cancel
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-menu>
-      </v-sheet>
-    </v-col>
-  </v-row>
-
-                </div>
-
-    </v-card>
-
-
-    </div>
-
-
-    <div class="my-5 ml-16">
-      <h2>Opiniones</h2>
-    </div>
-    <div
-      class="d-flex justify-center pb-6"
-      v-for="(opinion, i) in opiniones"
-      :key="i"
-    >
-      <v-card
-        width="1750"
-        class="rounded-lg"
-        style="
-          background: #dedede;
-          box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
-        "
+      <div class="my-5 ml-16 mt-10">
+        <h2>Opiniones</h2>
+      </div>
+      <div
+        class="d-flex justify-center pb-6"
+        v-for="(opinion, i) in opiniones"
+        :key="i"
       >
-        <v-card-title class="pt-1">{{ opinion.nombre }}</v-card-title>
-        <v-card-subtitle> {{ opinion.fecha }}</v-card-subtitle>
-        <div class="pl-4 pr-3 pb-1">{{ opinion.opinion }}</div>
-      </v-card>
+        <v-card
+          width="1750"
+          class="rounded-lg"
+          style="
+            background: #dedede;
+            box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+          "
+        >
+          <v-card-title class="pt-1">{{ opinion.nombre }}</v-card-title>
+          <v-card-subtitle> {{ opinion.fecha }}</v-card-subtitle>
+          <div class="pl-4 pr-3 pb-1 body-1">{{ opinion.opinion }}</div>
+        </v-card>
+      </div>
+    </div>
+
+    <div
+      v-if="$store.getters.darkMode"
+      style="background: #292929"
+      class="pt-9"
+    >
+      <div class="d-flex justify-center">
+        <v-card
+          height="750"
+          width="1800"
+          class="rounded-lg"
+          style="
+            background: #292929;
+            box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
+          "
+        >
+          <div>
+            <v-row align="start" no-gutters>
+              <div v-for="(src, i) in srcs" :key="i" class="ma-4 pl-8">
+                <v-col>
+                  <v-img
+                    height="300"
+                    max-width="500"
+                    :src="src"
+                    class="rounded-lg"
+                    style="
+                      background: #292929;
+                      box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
+                    "
+                  ></v-img>
+                </v-col>
+              </div>
+            </v-row>
+          </div>
+
+          <div class="pl-16 pt-3">
+            <v-row class="pl-8">
+              <h1 class="pl-2 grey--text text--lighten-2">
+                {{ evento.bodega }}
+              </h1>
+            </v-row>
+          </div>
+          <div class="pl-16 pt-6">
+            <v-row class="pl-8">
+              <h2 class="pl-2 grey--text text--lighten-1">
+                {{ evento.nombre }}
+              </h2>
+            </v-row>
+          </div>
+          <div class="pl-16 pt-9">
+            <v-row class="pl-8">
+              <v-rating
+                hover
+                half-increments
+                length="5"
+                size="30"
+                value="4.5"
+                background-color="orange lighten-3"
+                color="orange"
+              ></v-rating>
+              <h3 class="pt-3 grey--text">4.2 (153 valoraciones)</h3>
+            </v-row>
+          </div>
+
+          <div class="pl-15 mt-12">
+            <v-row>
+              <v-card
+                v-for="(p, i) in descripciones"
+                :key="i"
+                class="ma-3"
+                height="150"
+                width="400"
+                style="
+                  background: #292929;
+                  box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
+                "
+              >
+                <v-card-title class="pt-0 grey--text text--lighten-2">
+                  <v-icon
+                    v-text="p.icon"
+                    large
+                    dark
+                    class="d-flex justify-center pt-2 pr-2"
+                  ></v-icon>
+                  <h4>{{ p.nombre }}</h4>
+                </v-card-title>
+                <v-card-subtitle class="pl-15 grey--text body-1">
+                  {{ p.desc }}</v-card-subtitle
+                >
+              </v-card>
+            </v-row>
+          </div>
+        </v-card>
+      </div>
+
+      <div class="d-flex justify-center">
+        <v-card
+          height="1000"
+          width="1800"
+          class="rounded-lg mt-6"
+          style="
+            background: #292929;
+            box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
+          "
+        >
+          <h2 class="pl-9 pt-4 py-3 grey--text text--lighten-2">
+            <v-icon dark large>mdi-calendar-month-outline</v-icon>
+            Hacer reserva
+          </h2>
+
+          <div class="pa-10 pt-4 rounded-lg">
+            <v-row class="fill-height">
+              <v-col>
+                <v-sheet height="64">
+                  <v-toolbar flat dark color="grey darken-3">
+                    <v-btn dark class="mr-4" @click="setToday"> Today </v-btn>
+                    <v-btn fab text dark small @click="prev">
+                      <v-icon small dark> mdi-chevron-left </v-icon>
+                    </v-btn>
+                    <v-btn fab text dark small @click="next">
+                      <v-icon small dark> mdi-chevron-right </v-icon>
+                    </v-btn>
+                    <v-toolbar-title dark v-if="$refs.calendar">
+                      {{ $refs.calendar.title }}
+                    </v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-menu bottom right dark>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn outlined dark v-bind="attrs" v-on="on">
+                          <span>{{ typeToLabel[type] }}</span>
+                          <v-icon right dark> mdi-menu-down </v-icon>
+                        </v-btn>
+                      </template>
+                      <v-list>
+                        <v-list-item @click="type = 'day'">
+                          <v-list-item-title>Day</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item @click="type = 'week'">
+                          <v-list-item-title>Week</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item @click="type = 'month'">
+                          <v-list-item-title>Month</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item @click="type = '4day'">
+                          <v-list-item-title>4 days</v-list-item-title>
+                        </v-list-item>
+                      </v-list>
+                    </v-menu>
+                  </v-toolbar>
+                </v-sheet>
+                <v-sheet height="800" dark>
+                  <v-calendar
+                  dark
+                    ref="calendar"
+                    v-model="focus"
+                    color="primary"
+                    :events="events"
+                    :event-color="getEventColor"
+                    :type="type"
+                    @click:event="showEvent"
+                    @click:more="viewDay"
+                    @click:date="viewDay"
+                    @change="updateRange"
+                  ></v-calendar>
+                  <v-menu
+                    dark
+                    v-model="selectedOpen"
+                    :close-on-content-click="false"
+                    :activator="selectedElement"
+                    offset-x
+                  >
+                    <v-card color="grey lighten-2" min-width="350px" flat>
+                      <v-toolbar :color="selectedEvent.color" dark>
+                        <v-btn icon>
+                          <v-icon>mdi-pencil</v-icon>
+                        </v-btn>
+                        <v-toolbar-title
+                          v-html="selectedEvent.name"
+                        ></v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-btn icon>
+                          <v-icon>mdi-heart</v-icon>
+                        </v-btn>
+                        <v-btn icon>
+                          <v-icon>mdi-dots-vertical</v-icon>
+                        </v-btn>
+                      </v-toolbar>
+                      <v-card-text>
+                        <span v-html="selectedEvent.details"></span>
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-btn
+                          text
+                          color="secondary"
+                          @click="selectedOpen = false"
+                        >
+                          Cancel
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-menu>
+                </v-sheet>
+              </v-col>
+            </v-row>
+          </div>
+        </v-card>
+      </div>
+
+      <div class="my-5 ml-16 mt-10 grey--text text--lighten-2">
+        <h2>Opiniones</h2>
+      </div>
+      <div
+        class="d-flex justify-center pb-6"
+        v-for="(opinion, i) in opiniones"
+        :key="i"
+      >
+        <v-card
+          width="1750"
+          class="rounded-lg"
+          style="
+            background: #292929;
+            box-shadow:  5px 5px 10px #1a1a1a,-5px -5px 10px #383838;
+          "
+        >
+          <v-card-title class="pt-1 grey--text text--lighten-2">{{ opinion.nombre }}</v-card-title>
+          <v-card-subtitle class="grey--text"> {{ opinion.fecha }}</v-card-subtitle>
+          <div class="pl-4 pr-3 pb-1 grey--text text--lighten-1 body-1">{{ opinion.opinion }}</div>
+        </v-card>
+      </div>
     </div>
   </v-app>
 </template>
@@ -282,25 +470,34 @@
 export default {
   name: "Evento",
 
-
-
   data: () => ({
-
-focus: '',
-      type: 'month',
-      typeToLabel: {
-        month: 'Month',
-        week: 'Week',
-        day: 'Day',
-        '4day': '4 Days',
-      },
-      selectedEvent: {},
-      selectedElement: null,
-      selectedOpen: false,
-      events: [],
-      colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
-      names: ['Naturaleza en directo', 'Descubriendo Arzuaga', 'Sensaciones enológicas', 'Taller de cata a cargo de nuestro equipo de sumillería'],
- 
+    focus: "",
+    type: "month",
+    typeToLabel: {
+      month: "Month",
+      week: "Week",
+      day: "Day",
+      "4day": "4 Days",
+    },
+    selectedEvent: {},
+    selectedElement: null,
+    selectedOpen: false,
+    events: [],
+    colors: [
+      "blue",
+      "indigo",
+      "deep-purple",
+      "cyan",
+      "green",
+      "orange",
+      "grey darken-1",
+    ],
+    names: [
+      "Naturaleza en directo",
+      "Descubriendo Arzuaga",
+      "Sensaciones enológicas",
+      "Taller de cata a cargo de nuestro equipo de sumillería",
+    ],
 
     picker: null,
 
@@ -380,81 +577,79 @@ focus: '',
     print: function () {
       console.log(this.selector);
     },
-    viewDay ({ date }) {
-        this.focus = date
-        this.type = 'day'
-      },
-      getEventColor (event) {
-        return event.color
-      },
-      setToday () {
-        this.focus = ''
-      },
-      prev () {
-        this.$refs.calendar.prev()
-      },
-      next () {
-        this.$refs.calendar.next()
-      },
-      showEvent ({ nativeEvent, event }) {
-        const open = () => {
-          this.selectedEvent = event
-          this.selectedElement = nativeEvent.target
-          requestAnimationFrame(() => requestAnimationFrame(() => this.selectedOpen = true))
-        }
+    viewDay({ date }) {
+      this.focus = date;
+      this.type = "day";
+    },
+    getEventColor(event) {
+      return event.color;
+    },
+    setToday() {
+      this.focus = "";
+    },
+    prev() {
+      this.$refs.calendar.prev();
+    },
+    next() {
+      this.$refs.calendar.next();
+    },
+    showEvent({ nativeEvent, event }) {
+      const open = () => {
+        this.selectedEvent = event;
+        this.selectedElement = nativeEvent.target;
+        requestAnimationFrame(() =>
+          requestAnimationFrame(() => (this.selectedOpen = true))
+        );
+      };
 
-        if (this.selectedOpen) {
-          this.selectedOpen = false
-          requestAnimationFrame(() => requestAnimationFrame(() => open()))
-        } else {
-          open()
-        }
+      if (this.selectedOpen) {
+        this.selectedOpen = false;
+        requestAnimationFrame(() => requestAnimationFrame(() => open()));
+      } else {
+        open();
+      }
 
-        nativeEvent.stopPropagation()
-      },
-      updateRange ({ start, end }) {
-        const events = []
+      nativeEvent.stopPropagation();
+    },
+    updateRange({ start, end }) {
+      const events = [];
 
-        const min = new Date(`${start.date}T00:00:00`)
-        const max = new Date(`${end.date}T23:59:59`)
-        const days = (max.getTime() - min.getTime()) / 86400000
-        const eventCount = this.rnd(days, days + 20)
+      const min = new Date(`${start.date}T00:00:00`);
+      const max = new Date(`${end.date}T23:59:59`);
+      const days = (max.getTime() - min.getTime()) / 86400000;
+      const eventCount = this.rnd(days, days + 20);
 
+      for (let i = 0; i < eventCount; i++) {
+        let random = this.rnd(0, this.names.length - 1);
+        const allDay = this.rnd(0, 3) === 0;
+        const firstTimestamp = this.rnd(min.getTime(), max.getTime());
+        const first = new Date(firstTimestamp - (firstTimestamp % 900000));
+        const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000;
+        const second = new Date(first.getTime() + secondTimestamp);
 
-        
-
-        for (let i = 0; i < eventCount; i++) {
-          let random = this.rnd(0, this.names.length - 1);
-          const allDay = this.rnd(0, 3) === 0
-          const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-          const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-          const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-          const second = new Date(first.getTime() + secondTimestamp)
-
-          events.push({
-            /*name: this.names[this.rnd(0, this.names.length - 1)],
+        events.push({
+          /*name: this.names[this.rnd(0, this.names.length - 1)],
             start: first,
             end: second,
             color: this.colors[this.rnd(0, this.colors.length - 1)],
             timed: !allDay,*/
 
-           
-            name: this.names[random],
-            start: first,
-            end: second,
-            color: this.colors[random],
-            timed: !allDay,
-          })
-        }
+          name: this.names[random],
+          start: first,
+          end: second,
+          color: this.colors[random],
+          timed: !allDay,
+        });
+      }
 
-        this.events = events
-      },
-      rnd (a, b) {
-        return Math.floor((b - a + 1) * Math.random()) + a
-      },
-  },
-     mounted () {
-      this.$refs.calendar.checkChange()
+      this.events = events;
     },
+    rnd(a, b) {
+      return Math.floor((b - a + 1) * Math.random()) + a;
+    },
+  },
+  mounted() {
+    this.$refs.calendar.checkChange();
+  },
 };
 </script>

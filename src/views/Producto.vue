@@ -1,120 +1,282 @@
 <template>
-  <v-app class="pt-5">
-    <div class="d-flex justify-center mx-16 mt-6">
-      <v-row class="mb-6" no-gutters>
-        <v-col md="5" class="ml-16">
-          <div
-            style="
-              background: #dedede;
-              box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
-            "
-            class="rounded-lg"
-          >
-            <v-row class="mx-1">
-              <v-col md="3">
-                <div>
+  <v-app class="ma-0 pa-0">
+
+
+    <div
+      v-if="!$store.getters.darkMode"
+      style="background: #d9d9d9"
+      class="pt-5"
+    >
+      <div class="d-flex justify-center mx-16 mt-6">
+        <v-row class="mb-6" no-gutters>
+          <v-col md="5" class="ml-16">
+            <div
+              style="
+                background: #dedede;
+                box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+              "
+              class="rounded-lg"
+            >
+              <v-row class="mx-1">
+                <v-col md="3">
+                  <div>
+                    <div
+                      v-for="(src, i) in imagenes"
+                      :key="i"
+                      class="d-flex justify-center rounded-lg mb-1 mx-2"
+                      style="background-color: white"
+                      @mouseover="cambiarImagen(src)"
+                    >
+                      <v-avatar class="ma-3" size="120" tile>
+                        <v-img :src="src" contain class="rounded-lg"></v-img>
+                      </v-avatar>
+                    </div>
+                  </div>
+                </v-col>
+                <v-col md="9" offset-md="">
                   <div
-                    v-for="(src, i) in imagenes"
                     :key="i"
-                    class="d-flex justify-center rounded-lg mb-1 mx-2"
+                    class="d-flex justify-center rounded-lg mb-1"
                     style="background-color: white"
-                    @mouseover="cambiarImagen(src)"
                   >
-                    <v-avatar class="ma-3" size="120" tile>
-                      <v-img :src="src" contain class="rounded-lg"></v-img>
+                    <v-avatar class="ma-3" size="570" tile>
+                      <v-img :src="selected" contain class="rounded-lg"></v-img>
                     </v-avatar>
                   </div>
-                </div>
-              </v-col>
-              <v-col md="9" offset-md="">
-                <div
-                  :key="i"
-                  class="d-flex justify-center rounded-lg mb-1"
-                  style="background-color: white"
-                >
-                  <v-avatar class="ma-3" size="570" tile>
-                    <v-img :src="selected" contain class="rounded-lg"></v-img>
-                  </v-avatar>
-                </div>
-              </v-col>
-            </v-row>
-          </div>
-        </v-col>
-        <v-col md="4" offset-md="" class="ml-16">
-          <v-card
-            class="pa-2 rounded-lg"
-            style="
-              background: #dedede;
-              box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
-            "
-          >
-            <div>
-              <h1>{{ producto.nombre }}</h1>
-              <h3>NUESTRO BUQUE INSIGNIA</h3>
-              <h4 class="mb-3">RIBERA DEL DUERO</h4>
-              <h1 class="pb-2">{{ producto.precio }}</h1>
-              <v-row
-                ><v-rating
-                  hover
-                  half-increments
-                  length="5"
-                  size="30"
-                  value="4.5"
-                  background-color="orange lighten-3"
-                  color="orange"
-                  class="pb-9"
-                ></v-rating>
-                <h3 class="pt-3">(153 valoraciones)</h3>
-              </v-row>
-
-              <p>{{ producto.descripcion }}</p>
-              <v-row class="pt-4 pl-3 pb-4"
-                ><h2 class="mr-8">Cantidad</h2>
-                <div
-                  class="d-flex rounded-lg"
-                  style="
-                    background: #dedede;
-                    box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
-                  "
-                >
-                  <v-btn min-width="4" width="4" text @click="decrementar()"
-                    ><h2 class="">-</h2></v-btn
-                  >
-
-                  <h3 class="mt-1 mx-5">{{ cantidad }}</h3>
-                  <v-btn min-width="4" width="4" text @click="incrementar()"
-                    ><h2 class="">+</h2></v-btn
-                  >
-                </div>
-
-                <v-btn class="ml-16 custom_button">Comprar</v-btn>
+                </v-col>
               </v-row>
             </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>
-    <div class="my-5 ml-16">
-      <div class="ml-4"><h2 class="ml-16">Opiniones</h2></div>
-    </div>
-    <div
-      class="d-flex justify-center pb-6"
-      v-for="(opinion, i) in opiniones"
-      :key="i"
-    >
-      <v-card
-        width="1600"
-        class="rounded-lg"
-        style="
-          background: #dedede;
-          box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
-        "
+          </v-col>
+          <v-col md="4" offset-md="" class="ml-16">
+            <v-card
+              class="pa-2 rounded-lg"
+              style="
+                background: #dedede;
+                box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+              "
+            >
+              <div>
+                <h1>{{ producto.nombre }}</h1>
+                <h3>NUESTRO BUQUE INSIGNIA</h3>
+                <h4 class="mb-3">RIBERA DEL DUERO</h4>
+                <h1 class="pb-2">{{ producto.precio }}</h1>
+                <v-row
+                  ><v-rating
+                    hover
+                    half-increments
+                    length="5"
+                    size="30"
+                    value="4.5"
+                    background-color="orange lighten-3"
+                    color="orange"
+                    class="pb-9"
+                  ></v-rating>
+                  <h3 class="pt-3">(153 valoraciones)</h3>
+                </v-row>
+
+                <p class=" body-1">{{ producto.descripcion }}</p>
+                <v-row class="pt-4 pl-3 pb-4"
+                  ><h2 class="mr-8">Cantidad</h2>
+                  <div
+                    class="d-flex rounded-lg"
+                    style="
+                      background: #dedede;
+                      box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+                    "
+                  >
+                    <v-btn min-width="4" width="4" text @click="decrementar()"
+                      ><h2 class="">-</h2></v-btn
+                    >
+
+                    <h3 class="mt-1 mx-5">{{ cantidad }}</h3>
+                    <v-btn min-width="4" width="4" text @click="incrementar()"
+                      ><h2 class="">+</h2></v-btn
+                    >
+                  </div>
+
+                  <v-btn text
+                    v-if="$store.getters.logueado"
+                    class="ml-16 custom_button"
+                    router
+                    to="/Cesta"
+                    >Añadir al carro</v-btn
+                  >
+                  <v-btn text
+                    v-if="!$store.getters.logueado"
+                    class="ml-16 custom_button"
+                    router
+                    to="/Login"
+                    >Comprar</v-btn
+                  >
+                </v-row>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
+      </div>
+      <div class="my-5 ml-16">
+        <div class="ml-4"><h2 class="ml-16">Opiniones</h2></div>
+      </div>
+      <div
+        class="d-flex justify-center pb-6"
+        v-for="(opinion, i) in opiniones"
+        :key="i"
       >
-        <v-card-title class="pt-1">{{ opinion.nombre }}</v-card-title>
-        <v-card-subtitle> {{ opinion.fecha }}</v-card-subtitle>
-        <div class="pl-4 pr-3 pb-1">{{ opinion.opinion }}</div>
-      </v-card>
+        <v-card
+          width="1600"
+          class="rounded-lg"
+          style="
+            background: #dedede;
+            box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+          "
+        >
+          <v-card-title class="pt-1">{{ opinion.nombre }}</v-card-title>
+          <v-card-subtitle> {{ opinion.fecha }}</v-card-subtitle>
+          <div class="pl-4 pr-3 pb-1 body-1">{{ opinion.opinion }}</div>
+        </v-card>
+      </div>
     </div>
+
+
+    <div
+      v-if="$store.getters.darkMode"
+      style="background: #292929"
+      class="pt-5"
+    >
+      <div class="d-flex justify-center mx-16 mt-6">
+        <v-row class="mb-6" no-gutters>
+          <v-col md="5" class="ml-16">
+            <div
+              style="
+                background: #292929;
+                box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
+              "
+              class="rounded-lg"
+            >
+              <v-row class="mx-1">
+                <v-col md="3">
+                  <div>
+                    <div
+                      v-for="(src, i) in imagenes"
+                      :key="i"
+                      class="d-flex justify-center rounded-lg mb-1 mx-2"
+                      style="background: #383838"
+                      @mouseover="cambiarImagen(src)"
+                    >
+                      <v-avatar class="ma-3" size="120" tile>
+                        <v-img :src="src" contain class="rounded-lg"></v-img>
+                      </v-avatar>
+                    </div>
+                  </div>
+                </v-col>
+                <v-col md="9" offset-md="">
+                  <div
+                    :key="i"
+                    class="d-flex justify-center rounded-lg mb-1"
+                    style="background: #383838"
+                  >
+                    <v-avatar class="ma-3" size="570" tile>
+                      <v-img :src="selected" contain class="rounded-lg"></v-img>
+                    </v-avatar>
+                  </div>
+                </v-col>
+              </v-row>
+            </div>
+          </v-col>
+          <v-col md="4" offset-md="" class="ml-16">
+            <v-card
+              class="pa-2 rounded-lg"
+              style="
+                background: #292929;
+                box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
+              "
+            >
+              <div>
+                <h1 class=" grey--text text--lighten-2">{{ producto.nombre }}</h1>
+                <h3 class=" grey--text">NUESTRO BUQUE INSIGNIA</h3>
+                <h4 class="mb-3 grey--text">RIBERA DEL DUERO</h4>
+                <h1 class="pb-2 grey--text">{{ producto.precio }}</h1>
+                <v-row
+                  ><v-rating
+                    hover
+                    half-increments
+                    length="5"
+                    size="30"
+                    value="4.5"
+                    background-color="orange lighten-3"
+                    color="orange"
+                    class="pb-9"
+                  ></v-rating>
+                  <h3 class="pt-3 grey--text">(153 valoraciones)</h3>
+                </v-row>
+
+                <p class="pb-2 grey--text body-1">{{ producto.descripcion }}</p>
+                <v-row class="pt-2 pl-3 pb-4"
+                  ><h2 class="mr-8 grey--text">Cantidad</h2>
+                  <div
+                    class="d-flex rounded-lg"
+                    style="
+                      background: #292929;
+                      box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
+                    "
+                  >
+                    <v-btn min-width="4" width="4" text @click="decrementar()"
+                      ><h2 class=" grey--text">-</h2></v-btn
+                    >
+
+                    <h3 class="mt-1 mx-5 grey--text">{{ cantidad }}</h3>
+                    <v-btn min-width="4" width="4" text @click="incrementar()"
+                      ><h2 class=" grey--text">+</h2></v-btn
+                    >
+                  </div>
+
+                  <v-btn
+                    text
+                    v-if="$store.getters.logueado"
+                    class="ml-16 custom_buttonb grey--text"
+                    router
+                    to="/Cesta"
+                    >Añadir al carro</v-btn
+                  >
+                  <v-btn
+                    text
+                    v-if="!$store.getters.logueado"
+                    class="ml-16 custom_buttonb grey--text"
+                    router
+                    to="/Login"
+                    >Comprar</v-btn
+                  >
+                </v-row>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
+      </div>
+      <div class="my-5 ml-16">
+        <div class="ml-4"><h2 class="ml-16 grey--text text--lighten-2">Opiniones</h2></div>
+      </div>
+      <div
+        class="d-flex justify-center pb-6"
+        v-for="(opinion, i) in opiniones"
+        :key="i"
+      >
+        <v-card
+          width="1600"
+          class="rounded-lg"
+          style="
+            background: #292929;
+            box-shadow:  5px 5px 10px #1a1a1a,-5px -5px 10px #383838;
+             
+          "
+        >
+          <v-card-title class="pt-1 grey--text text--lighten-1">{{ opinion.nombre }}</v-card-title>
+          <v-card-subtitle class=" grey--text"> {{ opinion.fecha }}</v-card-subtitle>
+          <div class="pl-4 pr-3 pb-1 grey--text body-1">{{ opinion.opinion }}</div>
+        </v-card>
+      </div>
+    </div>
+
+
   </v-app>
 </template>
 
@@ -124,7 +286,7 @@ export default {
 
   mounted() {
     this.selected =
-      "https://media-verticommnetwork1.netdna-ssl.com/wines/arzuaga-crianza-1714283.jpg";
+      "https://www.arzuaganavarro.com/templates/yootheme/cache/crianzaHOME-bcfeeda3.png";
   },
 
   data: () => ({
@@ -182,13 +344,13 @@ export default {
         src: "https://www.arzuaganavarro.com/templates/yootheme/cache/crianzaHOME-bcfeeda3.png",
       },
       {
-        src: "https://vinotecacollado.com/8213-thickbox_default/arzuaga-crianza-2019.jpg",
+        src: "https://static3.aporvino.com/10336-thickbox_default/arzuaga-crianza-2017.jpg",
       },
       {
-        src: "https://media-verticommnetwork1.netdna-ssl.com/wines/arzuaga-crianza-1714283.jpg",
+        src: "https://catatu.es/imgs_vinos/imagenes/ArzuagaNavarro_ArzuagaCrianza.png",
       },
       {
-        src: "https://d3f5rf6vpkkrog.cloudfront.net/images/valoraciones/0020/9881/vino-arzuaga-navarro-2017.jpg?1576152772",
+        src: "https://www.vino-españa.es/images/stories/virtuemart/product/arzuaga-crianza.png",
       },
     ],
   }),

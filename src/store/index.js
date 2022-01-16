@@ -8,8 +8,13 @@ export default new Vuex.Store({
     logueado: false,
     currentItem: null,
     currentUser: null,
+    darkMode: false,
   },
   mutations: {
+    changeStateDarkMode(state) {
+      state.darkMode = !state.darkMode;
+      console.log("Modo darkMode", state.darkMode);
+    },
     changeStateLogueado(state) {
       state.logueado = !state.logueado;
       console.log("Estado logueado", state.logueado);
@@ -30,6 +35,9 @@ export default new Vuex.Store({
   },
   actions: {
     //llamamos con el dispatch
+    changeStateDarkModeAction(context) {
+      context.commit("changeStateDarkMode");
+    },
     changeStateLogueadoAction(context) {
       context.commit("changeStateLogueado");
     },
@@ -49,6 +57,9 @@ export default new Vuex.Store({
 */
   },
   getters: {
+    darkMode(state) {
+      return state.darkMode;
+    },
     logueado(state) {
       return state.logueado;
     },

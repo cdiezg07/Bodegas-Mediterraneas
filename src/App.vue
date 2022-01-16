@@ -1,10 +1,19 @@
 <template>
   <v-app app>
-    <navbar />
+    <div v-if="!$store.getters.darkMode" style="background: #d9d9d9">
+      <navbar />
 
-    <v-main class="mx-2 mb-4 pt-0">
-      <router-view></router-view>
-    </v-main>
+      <v-main class="mx-2 mb-4 pt-0">
+        <router-view></router-view>
+      </v-main>
+    </div>
+    <div v-if="$store.getters.darkMode" style="background: #292929">
+      <navbar />
+
+      <v-main class="mx-2 mb-4 pt-0">
+        <router-view></router-view>
+      </v-main>
+    </div>
   </v-app>
 </template>
 
@@ -29,16 +38,6 @@ export default {
   width: 150px;
 }
 
-#app {
-  background: #d9d9d9;
-}
-
-.flat {
-  background: #dedede;
-  box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
-  
-}
-
 .custom_button {
   transition: all 0.3s;
   background: #dbdbdb;
@@ -49,6 +48,19 @@ export default {
   background: rgb(255, 255, 255);
 }
 .custom_button:active {
+  color: #666;
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+}
+.custom_buttonb {
+  transition: all 0.3s;
+  background: #383838;
+  box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
+}
+.custom_buttonb:hover {
+  border: 1px solid rgb(255, 255, 255);
+  background: rgb(37, 37, 37);
+}
+.custom_buttonb:active {
   color: #666;
   box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
 }
@@ -65,29 +77,19 @@ export default {
   color: #666;
   box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
 }
-</style>
-
-<!--
-<style>
-#app {
-  background-image: url(https://images.pexels.com/photos/220118/pexels-photo-220118.jpeg);
-  background-repeat: no-repeat;
-
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  min-height: 100%;
+.custom_button1b {
+  transition: all 0.3s;
+  background: #292929;
+  box-shadow: inset 4px 4px 12px #1a1a1a, inset -4px -4px 12px #383838;
 }
-#card {
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(6.5px);
-  -webkit-backdrop-filter: blur(6.5px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+.custom_button1b:hover {
+  border: 1px solid rgb(255, 255, 255);
+  background: #292929;
 }
-#texto {
-  color: white;
+.custom_button1b:active {
+  color: #666;
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
 }
 </style>
--->
+
+<!-- -->

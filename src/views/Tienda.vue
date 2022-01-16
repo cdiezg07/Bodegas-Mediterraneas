@@ -1,130 +1,300 @@
 <template>
-  <v-app class="pt-5">
-    <div class="d-flex justify-center">
-      <v-card
-        height="400"
-        width="1800"
-        class="rounded-lg"
-        style="
-          background: #dedede;
-          box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
-        "
-      >
-        <div class="d-flex flex-no-wrap justify-space-between">
-          <v-avatar class="ma-3" size="375" tile>
-            <v-img :src="bodega.src" class="rounded-lg"></v-img>
-          </v-avatar>
-          <v-col cols="5"
-            ><div>
-              <v-card-title class="text-h4">{{ bodega.nombre }} </v-card-title>
+  <v-main class="ma-0 pa-0">
 
-              <v-card-subtitle class="pb-0 text-h6">{{
-                bodega.localizacion
-              }}</v-card-subtitle>
-              <v-card-subtitle class="pt-0">{{
-                bodega.provincia
-              }}</v-card-subtitle>
 
-              <div>
-                <v-card-text>
-                  <p>{{ bodega.descripcion }}</p>
-                </v-card-text>
-              </div>
-            </div></v-col
-          >
-          <div class="pt-3">
-            <v-avatar tile height="375" width="640" class="rounded-lg">
-              <v-img src="../assets/map.png"> </v-img
-            ></v-avatar>
-          </div>
+    <div
+      v-if="!$store.getters.darkMode"
+      style="background: #d9d9d9"
+      class="pt-5"
+    >
+      <div class="d-flex justify-center">
+        <v-card
+          height="400"
+          width="1800"
+          class="rounded-lg"
+          style="
+            background: #dedede;
+            box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+          "
+        >
+          <div class="d-flex flex-no-wrap justify-space-between">
+            <v-avatar class="ma-3" size="375" tile>
+              <v-img :src="bodega.src" class="rounded-lg"></v-img>
+            </v-avatar>
+            <v-col cols="5"
+              ><div>
+                <v-card-title class="text-h4"
+                  >{{ bodega.nombre }}
+                </v-card-title>
 
-          <v-col></v-col>
-        </div>
-      </v-card>
-    </div>
-    <div class="ml-15 mt-8">
-      <v-row
-        ><div class="text-center">
-          <v-select
-            v-model="selector"
-            :items="select"
-            dense
-            solo
-            @change="print()"
-            class="selects mb-6"
-            style="
-              height: 30px;
-              background: #e0e0e0;
-              box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
-            "
-          ></v-select></div
-      ></v-row>
-    </div>
-    <div v-if="selector == 'Productos'" class="ml-11">
-      <v-row>
-        <v-col v-for="(p, i) in productos" :key="i" cols="2">
-          <v-card
-            class="ma-3 pt-1"
-            height="420"
-            style="
-              background: #dedede;
-              box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
-            "
-          >
-            <v-img :src="p.src" class="mt-1" height="250" contain></v-img>
+                <v-card-subtitle class="pb-0 text-h6">{{
+                  bodega.localizacion
+                }}</v-card-subtitle>
+                <v-card-subtitle class="pt-0">{{
+                  bodega.provincia
+                }}</v-card-subtitle>
 
-            <v-card-title>{{ p.nombre }} </v-card-title>
-            <v-card-subtitle class="pb-0">
-              <span> {{ p.precio }}</span></v-card-subtitle
+                <div>
+                  <v-card-text class=" body-1">
+                    <p>{{ bodega.descripcion }}</p>
+                  </v-card-text>
+                </div>
+              </div></v-col
             >
-
-            <div class="d-flex justify-center pb-3 pt-2">
-              <v-btn class="custom_button" text router to="/Producto">
-                ver producto
-              </v-btn>
+            <div class="pt-3">
+              <v-avatar tile height="375" width="640" class="rounded-lg">
+                <v-img src="../assets/map.png"> </v-img
+              ></v-avatar>
             </div>
-          </v-card>
-        </v-col></v-row
-      >
-    </div>
-    <div v-if="selector == 'Eventos'" class="">
-      <v-slide-group show-arrows class="mt-2">
-        <v-slide-item v-for="(e, i) in eventos" :key="i" class="ma-3 mr-2">
-          <v-card height="330" width="600" class="rounded-lg" style="
-              background: #dedede;
-              box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
-            ">
-            <div class="d-flex justify-start">
-              <v-avatar class="ma-3" size="300" tile>
-                <v-img :src="e.src" class="rounded-lg"></v-img>
-              </v-avatar>
-              <v-col cols="6"
-                ><div>
-                  <v-card-title
-                    class="text-h5 mr-2"
-                    v-text="e.nombre"
-                  ></v-card-title>
 
-                  <v-card-subtitle class="pb-0 mr-2">{{
-                    e.descripcion
-                  }}</v-card-subtitle>
+            <v-col></v-col>
+          </div>
+        </v-card>
+      </div>
+      <div class="ml-15 mt-8">
+        <v-row
+          ><div class="text-center">
+            <v-select
+              v-model="selector"
+              :items="select"
+              dense
+              solo
+              @change="print()"
+              class="selects mb-6"
+              style="
+                height: 30px;
+                background: #e0e0e0;
+                box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+              "
+            ></v-select></div
+        ></v-row>
+      </div>
+      <div v-if="selector == 'Productos'" class="ml-11">
+        <v-row>
+          <v-col v-for="(p, i) in productos" :key="i" cols="2">
+            <v-card
+              class="ma-3 pt-1"
+              height="420"
+              style="
+                background: #dedede;
+                box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+              "
+            >
+              <v-img :src="p.src" class="mt-1" height="250" contain></v-img>
 
-                  <v-card-actions class="ml-2">
-                    <div>
-                      <v-btn text class="custom_button"  router to="/Evento">
-                        ver más
-                      </v-btn>
-                    </div>
-                  </v-card-actions>
-                </div></v-col
+              <v-card-title>{{ p.nombre }} </v-card-title>
+              <v-card-subtitle class="pb-0">
+                <span> {{ p.precio }}</span></v-card-subtitle
               >
-            </div>
-          </v-card>
-          <!---->
-        </v-slide-item>
-      </v-slide-group>
+
+              <div class="d-flex justify-center pb-3 pt-2">
+                <v-btn class="custom_button" text router to="/Producto">
+                  ver producto
+                </v-btn>
+              </div>
+            </v-card>
+          </v-col></v-row
+        >
+      </div>
+      <div v-if="selector == 'Eventos'" class="">
+        <v-slide-group show-arrows class="mt-2">
+          <v-slide-item v-for="(e, i) in eventos" :key="i" class="ma-3 mr-2 mb-11">
+            <v-card
+              height="330"
+              width="600"
+              class="rounded-lg"
+              style="
+                background: #dedede;
+                box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+              "
+            >
+              <div class="d-flex justify-start">
+                <v-avatar class="ma-3" size="300" tile>
+                  <v-img :src="e.src" class="rounded-lg"></v-img>
+                </v-avatar>
+                <v-col cols="6"
+                  ><div>
+                    <v-card-title
+                      class="text-h5 mr-2"
+                      v-text="e.nombre"
+                    ></v-card-title>
+
+                    <v-card-subtitle class="pb-0 mr-2 body-1">{{
+                      e.descripcion
+                    }}</v-card-subtitle>
+
+                    <v-card-actions class="ml-2">
+                      <div>
+                        <v-btn text class="custom_button" router to="/Evento">
+                          ver más
+                        </v-btn>
+                      </div>
+                    </v-card-actions>
+                  </div></v-col
+                >
+              </div>
+            </v-card>
+            <!---->
+          </v-slide-item>
+        </v-slide-group>
+      </div>
     </div>
-  </v-app>
+
+
+
+    <div
+      v-if="$store.getters.darkMode"
+      style="background: #292929"
+      class="pt-5"
+    >
+      <div class="d-flex justify-center">
+        <v-card
+          height="400"
+          width="1800"
+          class="rounded-lg"
+          style="
+            background: #292929;
+            box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
+          "
+        >
+          <div class="d-flex flex-no-wrap justify-space-between">
+            <v-avatar class="ma-3" size="375" tile>
+              <v-img :src="bodega.src" class="rounded-lg"></v-img>
+            </v-avatar>
+            <v-col cols="5"
+              ><div>
+                <v-card-title class="text-h4 grey--text text--lighten-2"
+                  >{{ bodega.nombre }}
+                </v-card-title>
+
+                <v-card-subtitle class="pb-0 text-h6 grey--text">{{
+                  bodega.localizacion
+                }}</v-card-subtitle>
+                <v-card-subtitle class="pt-0 grey--text">{{
+                  bodega.provincia
+                }}</v-card-subtitle>
+
+                <div>
+                  <v-card-text>
+                    <p class="grey--text  body-1">{{ bodega.descripcion }}</p>
+                  </v-card-text>
+                </div>
+              </div></v-col
+            >
+            <div class="pt-3">
+              <v-avatar tile height="375" width="640" class="rounded-lg">
+                <v-img src="../assets/map.png"> </v-img
+              ></v-avatar>
+            </div>
+
+            <v-col></v-col>
+          </div>
+        </v-card>
+      </div>
+      <div class="ml-15 mt-8">
+        <v-row
+          ><div class="text-center">
+            <v-select
+              v-model="selector"
+              :items="select"
+              item-color="black"
+              dense
+              solo
+              dark
+              @change="print()"
+              class="selects mb-6"
+              style="
+                height: 30px;
+                background: #292929;
+                box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
+              "
+            ></v-select></div
+        ></v-row>
+      </div>
+      <div v-if="selector == 'Productos'" class="ml-11">
+        <v-row>
+          <v-col v-for="(p, i) in productos" :key="i" cols="2">
+            <v-card
+              class="ma-3 pt-1"
+              height="420"
+              style="
+                background: #292929;
+                box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
+              "
+            >
+              <v-img :src="p.src" class="mt-1" height="250" contain></v-img>
+
+              <v-card-title class="grey--text text--lighten-2"
+                >{{ p.nombre }}
+              </v-card-title>
+              <v-card-subtitle class="pb-0 grey--text">
+                <span> {{ p.precio }}</span></v-card-subtitle
+              >
+
+              <div class="d-flex justify-center pb-3 pt-2">
+                <v-btn
+                  class="custom_buttonb grey--text"
+                  text
+                  router
+                  to="/Producto"
+                >
+                  ver producto
+                </v-btn>
+              </div>
+            </v-card>
+          </v-col></v-row
+        >
+      </div>
+      <div v-if="selector == 'Eventos'" class="">
+        <v-slide-group show-arrows dark class="mt-2">
+          <v-slide-item v-for="(e, i) in eventos" :key="i" class="ma-3 mr-2 mb-11">
+            <v-card
+              height="330"
+              width="600"
+              class="rounded-lg"
+              style="
+                background: #292929;
+                box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
+              "
+            >
+              <div class="d-flex justify-start">
+                <v-avatar class="ma-3" size="300" tile>
+                  <v-img :src="e.src" class="rounded-lg"></v-img>
+                </v-avatar>
+                <v-col cols="6"
+                  ><div>
+                    <v-card-title
+                      class="text-h5 mr-2 grey--text text--lighten-2"
+                      v-text="e.nombre"
+                    ></v-card-title>
+
+                    <v-card-subtitle class="pb-0 mr-2 grey--text body-1">{{
+                      e.descripcion
+                    }}</v-card-subtitle>
+
+                    <v-card-actions class="ml-2">
+                      <div>
+                        <v-btn
+                          text
+                          class="custom_buttonb grey--text"
+                          router
+                          to="/Evento"
+                        >
+                          ver más
+                        </v-btn>
+                      </div>
+                    </v-card-actions>
+                  </div></v-col
+                >
+              </div>
+            </v-card>
+          </v-slide-item>
+        </v-slide-group>
+      </div>
+    </div>
+
+
+  </v-main>
 </template>
 
 <script>
@@ -154,7 +324,7 @@ export default {
       },
       {
         src: "https://www.arzuaganavarro.com/templates/yootheme/cache/plantaHOME-fe1586da.png",
-        nombre: "LA PLANTA 2020",
+        nombre: "LA PLANTA CRIANZA 2020",
         precio: "8,50€ – 17,50€",
       },
       {
