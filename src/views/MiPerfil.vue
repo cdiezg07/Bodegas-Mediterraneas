@@ -56,7 +56,7 @@
             </v-btn>
 
             <v-btn v-if="editando" class="ma-2 custom_button" color="green" text @click="editando = !editando">
-              Aply changes
+              Apply changes
               <v-icon right> mdi-check-bold </v-icon>
             </v-btn>
           </v-col>

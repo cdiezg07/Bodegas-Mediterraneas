@@ -235,16 +235,12 @@
                   >
                     <v-card color="grey lighten-4" min-width="350px" flat>
                       <v-toolbar :color="selectedEvent.color" dark>
-                        <v-btn icon>
-                          <v-icon>mdi-pencil</v-icon>
-                        </v-btn>
+                        
                         <v-toolbar-title
                           v-html="selectedEvent.name"
                         ></v-toolbar-title>
                         <v-spacer></v-spacer>
-                        <v-btn icon>
-                          <v-icon>mdi-heart</v-icon>
-                        </v-btn>
+                        
                         <v-btn icon>
                           <v-icon>mdi-dots-vertical</v-icon>
                         </v-btn>
@@ -258,7 +254,7 @@
                           color="secondary"
                           @click="selectedOpen = false"
                         >
-                          Cancel
+                          Reservar
                         </v-btn>
                       </v-card-actions>
                     </v-card>
@@ -558,16 +554,12 @@
                   >
                     <v-card color="grey lighten-2" min-width="350px" flat>
                       <v-toolbar :color="selectedEvent.color" dark>
-                        <v-btn icon>
-                          <v-icon>mdi-pencil</v-icon>
-                        </v-btn>
+                        
                         <v-toolbar-title
                           v-html="selectedEvent.name"
                         ></v-toolbar-title>
                         <v-spacer></v-spacer>
-                        <v-btn icon>
-                          <v-icon>mdi-heart</v-icon>
-                        </v-btn>
+                        
                         <v-btn icon>
                           <v-icon>mdi-dots-vertical</v-icon>
                         </v-btn>
@@ -581,7 +573,7 @@
                           color="secondary"
                           @click="selectedOpen = false"
                         >
-                          Cancel
+                          Reservar
                         </v-btn>
                       </v-card-actions>
                     </v-card>
