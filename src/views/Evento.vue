@@ -249,12 +249,19 @@
                         <span v-html="selectedEvent.details"></span>
                       </v-card-text>
                       <v-card-actions>
-                        <v-btn
+                        <v-btn v-if="$store.getters.currentLenguaje ==='es'"
                           text
                           color="secondary"
                           @click="selectedOpen = false"
                         >
                           Reservar
+                        </v-btn>
+                        <v-btn v-if="$store.getters.currentLenguaje ==='en'"
+                          text
+                          color="secondary"
+                          @click="selectedOpen = false"
+                        >
+                          Book
                         </v-btn>
                       </v-card-actions>
                     </v-card>
@@ -568,12 +575,19 @@
                         <span v-html="selectedEvent.details"></span>
                       </v-card-text>
                       <v-card-actions>
-                        <v-btn
+                        <v-btn v-if="$store.getters.currentLenguaje ==='es'"
                           text
                           color="secondary"
                           @click="selectedOpen = false"
                         >
                           Reservar
+                        </v-btn>
+                        <v-btn v-if="$store.getters.currentLenguaje ==='en'"
+                          text
+                          color="secondary"
+                          @click="selectedOpen = false"
+                        >
+                          Book
                         </v-btn>
                       </v-card-actions>
                     </v-card>
