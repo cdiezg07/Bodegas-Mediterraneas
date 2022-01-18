@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     logueado: false,
-    currentItem: null,
+    currentLenguaje: "es",
     currentUser: null,
     darkMode: false,
   },
@@ -23,9 +23,9 @@ export default new Vuex.Store({
       state.logueado = data;
       console.log("Estado logueado", state.logueado);
     },
-    setCurrentItem(state, data) {
-      state.currentItem = data;
-      console.log("current Item", state.currentItem);
+    setCurrentLenguaje(state, data) {
+      state.currentLenguaje = data;
+      console.log("current lenguaje", state.currentLenguaje);
     },
     setCurrentUser(state, data) {
       console.log(data);
@@ -44,8 +44,8 @@ export default new Vuex.Store({
     setStateLogueadoAction(context, data) {
       context.commit("setStateLogueado", data);
     },
-    setCurrentItemAction(context, data) {
-      context.commit("setCurrentItem", data); //a mutations
+    setCurrentLenguajeAction(context, data) {
+      context.commit("setCurrentLenguaje", data); //a mutations
     },
     setCurrentUserAction(context, data) {
       context.commit("setCurrentUser", data);
@@ -63,8 +63,8 @@ export default new Vuex.Store({
     logueado(state) {
       return state.logueado;
     },
-    currentItem(state) {
-      return state.currentItem;
+    currentLenguaje(state) {
+      return state.currentLenguaje;
     },
     currentUser(state) {
       return state.currentUser;

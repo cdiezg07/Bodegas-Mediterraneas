@@ -34,7 +34,8 @@
             </v-row>
           </div>
 
-          <div class="pl-16 pt-3">
+          <div v-if="$store.getters.currentLenguaje ==='es'">
+            <div class="pl-16 pt-3">
             <v-row class="pl-8">
               <h1 class="pl-2">{{ evento.bodega }}</h1>
             </v-row>
@@ -55,8 +56,8 @@
                 background-color="orange lighten-3"
                 color="orange"
               ></v-rating>
-              <h3 class="pt-3">4.2</h3>
-              <h3 class="pt-3">(153 valoraciones)</h3>
+              <h3 class="pt-3">4.2 (153 valoraciones)</h3>
+              
             </v-row>
           </div>
 
@@ -66,7 +67,6 @@
                 v-for="(p, i) in descripciones"
                 :key="i"
                 class="ma-3"
-                height="150"
                 width="400"
                 style="
                   background: #dedede;
@@ -85,6 +85,61 @@
               </v-card>
             </v-row>
           </div>
+          </div>
+
+          <div v-if="$store.getters.currentLenguaje ==='en'">
+            <div class="pl-16 pt-3">
+            <v-row class="pl-8">
+              <h1 class="pl-2">{{ evento_en.bodega }}</h1>
+            </v-row>
+          </div>
+          <div class="pl-16 pt-6">
+            <v-row class="pl-8">
+              <h2 class="pl-2">{{ evento_en.nombre }}</h2>
+            </v-row>
+          </div>
+          <div class="pl-16 pt-9">
+            <v-row class="pl-8">
+              <v-rating
+                hover
+                half-increments
+                length="5"
+                size="30"
+                value="4.5"
+                background-color="orange lighten-3"
+                color="orange"
+              ></v-rating>
+              <h3 class="pt-3">4.2 (153 ratings)</h3>
+            </v-row>
+          </div>
+
+          <div class="pl-15 mt-12">
+            <v-row>
+              <v-card
+                v-for="(p, i) in descripciones_en"
+                :key="i"
+                class="ma-3"
+                width="400"
+                style="
+                  background: #dedede;
+                  box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+                "
+              >
+                <v-card-title class="pt-0">
+                  <v-icon
+                    v-text="p.icon"
+                    large
+                    class="d-flex justify-center pt-2 pr-2"
+                  ></v-icon>
+                  <h4>{{ p.nombre }}</h4>
+                </v-card-title>
+                <v-card-subtitle class="pl-15 body-1"> {{ p.desc }}</v-card-subtitle>
+              </v-card>
+            </v-row>
+          </div>
+          </div>
+
+          
         </v-card>
       </div>
 
@@ -98,9 +153,13 @@
             box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
           "
         >
-          <h2 class="pl-9 pt-4 py-3">
+          <h2 class="pl-9 pt-4 py-3" v-if="$store.getters.currentLenguaje ==='es'">
             <v-icon large>mdi-calendar-month-outline</v-icon>
             Hacer reserva
+          </h2>
+          <h2 class="pl-9 pt-4 py-3" v-if="$store.getters.currentLenguaje ==='en'">
+            <v-icon large>mdi-calendar-month-outline</v-icon>
+            Make a reservation
           </h2>
 
           <div class="pa-10 pt-4 rounded-lg">
@@ -212,9 +271,11 @@
       </div>
 
       <div class="my-5 ml-16 mt-10">
-        <h2>Opiniones</h2>
+        <h2 v-if="$store.getters.currentLenguaje ==='es'">Opiniones</h2>
+        <h2 v-if="$store.getters.currentLenguaje ==='en'">Feedback</h2>
       </div>
-      <div
+      <div v-if="$store.getters.currentLenguaje ==='es'">
+        <div 
         class="d-flex justify-center pb-6"
         v-for="(opinion, i) in opiniones"
         :key="i"
@@ -232,6 +293,30 @@
           <div class="pl-4 pr-3 pb-1 body-1">{{ opinion.opinion }}</div>
         </v-card>
       </div>
+      </div>
+      
+      <div v-if="$store.getters.currentLenguaje ==='en'">
+        <div
+        class="d-flex justify-center pb-6"
+        v-for="(opinion, i) in opiniones_en"
+        :key="i"
+      >
+        <v-card
+          width="1750"
+          class="rounded-lg"
+          style="
+            background: #dedede;
+            box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+          "
+        >
+          <v-card-title class="pt-1">{{ opinion.nombre }}</v-card-title>
+          <v-card-subtitle> {{ opinion.fecha }}</v-card-subtitle>
+          <div class="pl-4 pr-3 pb-1 body-1">{{ opinion.opinion }}</div>
+        </v-card>
+      </div>
+      </div>
+
+      
     </div>
 
     <div
@@ -268,63 +353,126 @@
             </v-row>
           </div>
 
-          <div class="pl-16 pt-3">
-            <v-row class="pl-8">
-              <h1 class="pl-2 grey--text text--lighten-2">
-                {{ evento.bodega }}
-              </h1>
-            </v-row>
-          </div>
-          <div class="pl-16 pt-6">
-            <v-row class="pl-8">
-              <h2 class="pl-2 grey--text text--lighten-1">
-                {{ evento.nombre }}
-              </h2>
-            </v-row>
-          </div>
-          <div class="pl-16 pt-9">
-            <v-row class="pl-8">
-              <v-rating
-                hover
-                half-increments
-                length="5"
-                size="30"
-                value="4.5"
-                background-color="orange lighten-3"
-                color="orange"
-              ></v-rating>
-              <h3 class="pt-3 grey--text">4.2 (153 valoraciones)</h3>
-            </v-row>
+          <div v-if="$store.getters.currentLenguaje ==='es'">
+  <div class="pl-16 pt-3">
+              <v-row class="pl-8">
+                <h1 class="pl-2 grey--text text--lighten-2">
+                  {{ evento.bodega }}
+                </h1>
+              </v-row>
+            </div>
+            <div class="pl-16 pt-6">
+              <v-row class="pl-8">
+                <h2 class="pl-2 grey--text text--lighten-1">
+                  {{ evento.nombre }}
+                </h2>
+              </v-row>
+            </div>
+            <div class="pl-16 pt-9">
+              <v-row class="pl-8">
+                <v-rating
+                  hover
+                  half-increments
+                  length="5"
+                  size="30"
+                  value="4.5"
+                  background-color="orange lighten-3"
+                  color="orange"
+                ></v-rating>
+                <h3 class="pt-3 grey--text">4.2 (153 valoraciones)</h3>
+              </v-row>
+            </div>
+
+            <div class="pl-15 mt-12">
+              <v-row>
+                <v-card
+                  v-for="(p, i) in descripciones"
+                  :key="i"
+                  class="ma-3"
+                  height="150"
+                  width="400"
+                  style="
+                    background: #292929;
+                    box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
+                  "
+                >
+                  <v-card-title class="pt-0 grey--text text--lighten-2">
+                    <v-icon
+                      v-text="p.icon"
+                      large
+                      dark
+                      class="d-flex justify-center pt-2 pr-2"
+                    ></v-icon>
+                    <h4>{{ p.nombre }}</h4>
+                  </v-card-title>
+                  <v-card-subtitle class="pl-15 grey--text body-1">
+                    {{ p.desc }}</v-card-subtitle
+                  >
+                </v-card>
+              </v-row>
+            </div>
           </div>
 
-          <div class="pl-15 mt-12">
-            <v-row>
-              <v-card
-                v-for="(p, i) in descripciones"
-                :key="i"
-                class="ma-3"
-                height="150"
-                width="400"
-                style="
-                  background: #292929;
-                  box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
-                "
-              >
-                <v-card-title class="pt-0 grey--text text--lighten-2">
-                  <v-icon
-                    v-text="p.icon"
-                    large
-                    dark
-                    class="d-flex justify-center pt-2 pr-2"
-                  ></v-icon>
-                  <h4>{{ p.nombre }}</h4>
-                </v-card-title>
-                <v-card-subtitle class="pl-15 grey--text body-1">
-                  {{ p.desc }}</v-card-subtitle
+          <div v-if="$store.getters.currentLenguaje ==='en'">
+  <div class="pl-16 pt-3">
+              <v-row class="pl-8">
+                <h1 class="pl-2 grey--text text--lighten-2">
+                  {{ evento_en.bodega }}
+                </h1>
+              </v-row>
+            </div>
+            <div class="pl-16 pt-6">
+              <v-row class="pl-8">
+                <h2 class="pl-2 grey--text text--lighten-1">
+                  {{ evento_en.nombre }}
+                </h2>
+              </v-row>
+            </div>
+            <div class="pl-16 pt-9">
+              <v-row class="pl-8">
+                <v-rating
+                  hover
+                  half-increments
+                  length="5"
+                  size="30"
+                  value="4.5"
+                  background-color="orange lighten-3"
+                  color="orange"
+                ></v-rating>
+                <h3 class="pt-3 grey--text">4.2 (153 ratings)</h3>
+              </v-row>
+            </div>
+
+            <div class="pl-15 mt-12">
+              <v-row>
+                <v-card
+                  v-for="(p, i) in descripciones_en"
+                  :key="i"
+                  class="ma-3"
+                  width="400"
+                  style="
+                    background: #292929;
+                    box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
+                  "
                 >
-              </v-card>
-            </v-row>
+                  <v-card-title class="pt-0 grey--text text--lighten-2">
+                    <v-icon
+                      v-text="p.icon"
+                      large
+                      dark
+                      class="d-flex justify-center pt-2 pr-2"
+                    ></v-icon>
+                    <h4>{{ p.nombre }}</h4>
+                  </v-card-title>
+                  <v-card-subtitle class="pl-15 grey--text body-1">
+                    {{ p.desc }}</v-card-subtitle
+                  >
+                </v-card>
+              </v-row>
+            </div>
           </div>
+
+          
         </v-card>
       </div>
 
@@ -338,9 +486,13 @@
             box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;
           "
         >
-          <h2 class="pl-9 pt-4 py-3 grey--text text--lighten-2">
+          <h2 v-if="$store.getters.currentLenguaje ==='es'" class="pl-9 pt-4 py-3 grey--text text--lighten-2">
             <v-icon dark large>mdi-calendar-month-outline</v-icon>
             Hacer reserva
+          </h2>
+          <h2 v-if="$store.getters.currentLenguaje ==='en'" class="pl-9 pt-4 py-3 grey--text text--lighten-2">
+            <v-icon dark large>mdi-calendar-month-outline</v-icon>
+            Make a reservation
           </h2>
 
           <div class="pa-10 pt-4 rounded-lg">
@@ -442,9 +594,13 @@
       </div>
 
       <div class="my-5 ml-16 mt-10 grey--text text--lighten-2">
-        <h2>Opiniones</h2>
+        <h2 v-if="$store.getters.currentLenguaje ==='es'">Opiniones</h2>
+        <h2 v-if="$store.getters.currentLenguaje ==='en'">Feedback</h2>
       </div>
-      <div
+      
+
+      <div v-if="$store.getters.currentLenguaje ==='es'">
+        <div
         class="d-flex justify-center pb-6"
         v-for="(opinion, i) in opiniones"
         :key="i"
@@ -462,6 +618,31 @@
           <div class="pl-4 pr-3 pb-1 grey--text text--lighten-1 body-1">{{ opinion.opinion }}</div>
         </v-card>
       </div>
+      </div>
+
+      <div v-if="$store.getters.currentLenguaje ==='en'">
+        <div
+        class="d-flex justify-center pb-6"
+        v-for="(opinion, i) in opiniones_en"
+        :key="i"
+      >
+        <v-card
+          width="1750"
+          class="rounded-lg"
+          style="
+            background: #292929;
+            box-shadow:  5px 5px 10px #1a1a1a,-5px -5px 10px #383838;
+          "
+        >
+          <v-card-title class="pt-1 grey--text text--lighten-2">{{ opinion.nombre }}</v-card-title>
+          <v-card-subtitle class="grey--text"> {{ opinion.fecha }}</v-card-subtitle>
+          <div class="pl-4 pr-3 pb-1 grey--text text--lighten-1 body-1">{{ opinion.opinion }}</div>
+        </v-card>
+      </div>
+      </div>
+
+
+      
     </div>
   </v-app>
 </template>
@@ -510,6 +691,10 @@ export default {
       nombre: "Taller de cata a cargo de nuestro equipo de sumillería.",
       bodega: "Bodegas Arzuaga Navarro",
     },
+    evento_en: {
+      nombre: "Tasting workshop conducted by our sommelier team.",
+      bodega: "Arzuaga Navarro Winery",
+    },
     //https://es.gowork.com/bodegas-arzuaga-navarro-lerma
     //https://www.tripadvisor.es/ShowUserReviews-g1072462-d2663333-r821150940-Bodegas_Arzuaga_Navarro-Quintanilla_de_Onesimo_Province_of_Valladolid_Castile_a.html
     opiniones: [
@@ -550,6 +735,44 @@ export default {
           "La compañia se centra en la elaboración, cuidado, cosecha y venta de vinos, aprovecha esta oportunidad para desarrollar tus habilidades y crecer en la empresa. Es importante la proactividad, la atención a los detalles y la amabilidad para formar parte de nuestro gran ambiente laboral.",
       },
     ],
+    opiniones_en: [
+      {
+        nombre: "Pablo",
+        fecha: "2020-08-12",
+        opinion:
+          "The tasting workshop was a great experience. Guided by a professional oenologist in a spectacular dining room we tasted the wines of the winery accompanied by special tapas. Everything was smooth and unhurried, enjoying the moment.",
+      },
+      {
+        nombre: "Nerea",
+        fecha: "2021-08-03",
+        opinion:
+          "We had a wonderful time. I had to take this trip in extremis because the place we were going to, the weather failed us. I was quite skeptical because of the reviews, and maybe that's why...since my expectations were not high, I loved the weekend. Of course it is not a 5 star but having said that, the visit to the estate, the two tastings, the two restaurants, the visit to the winery, the proximity to Peñafiel, some time in the spa, a massage (very weak, of course) and so much fun. And the best was the Arzuaga wine. And the wonderful bed.",
+      },
+      {
+        nombre: "Ana",
+        fecha: "2021-07-27",
+        opinion:
+          "Great weekend as a couple. Highly recommended the complete pack of: Spa (Circuit + Wine Spa as a couple), visit to see deer and wild boars, visit to the winery, wine and oil tasting (one of the best tastings I've done), and .... and to top it all off, a special mention to the Restaurant El Taller. Amaya Arzuaga herself makes sure that it is a very careful experience. You leave with a feeling of having disconnected in a unique environment.",
+      },
+      {
+        nombre: "Victor Manuel",
+        fecha: "2020-01-08",
+        opinion:
+          "Winemaking. A lot of work, but very grateful. Extraordinary work environment. The only downside is that they make temporary hires and it is complicated to get job stability, but not impossible, the pay is high!",
+      },
+      {
+        nombre: "elo",
+        fecha: "2019-12-08",
+        opinion:
+          "It is a company dedicated to the production, preservation and aging of wines of all kinds, I have been a wine taster for a couple of years and I am very grateful for the opportunity, I have perfected myself and the salaries are high, plus the colleagues are great.",
+      },
+      {
+        nombre: "Gloria",
+        fecha: "2019-06-12",
+        opinion:
+          "The company focuses on the production, care, harvesting and sale of wines, take advantage of this opportunity to develop your skills and grow in the company. Proactivity, attention to detail and friendliness are important to be part of our great work environment.",
+      },
+    ],
     descripciones: [
       {
         nombre: "TALLER DE CATA",
@@ -569,6 +792,28 @@ export default {
       {
         nombre: "INICIACIÓN A LA CATA",
         desc: "Martes, miércoles, jueves,viernes, sábados y domingo 12:30h. Duración aprox. una hora donde se catarán tres vinos y tapas gastronómicas.",
+        icon: "mdi-clock-time-nine-outline",
+      },
+    ],
+    descripciones_en: [
+      {
+        nombre: "TASTING WORKSHOP",
+        desc: "An approach to the knowledge of the world of wine in a pleasant and personal way.",
+        icon: "mdi-fruit-grapes-outline",
+      },
+      {
+        nombre: "OUR WINES",
+        desc: "Master class on our wines in small groups. With previous reservation.",
+        icon: "mdi-bottle-wine",
+      },
+      {
+        nombre: "TASTING WORKSHOP",
+        desc: "Saturdays at 6:00 p.m. Approximately two and a half hours where five wines and gastronomic tapas will be tasted.",
+        icon: "mdi-clock-time-four-outline",
+      },
+      {
+        nombre: "INITIATION TO TASTING",
+        desc: "Tuesdays, Wednesdays, Thursdays, Fridays, Saturdays and Sundays at 12:30 pm. Duration approx. one hour where three wines and gastronomic tapas will be tasted.",
         icon: "mdi-clock-time-nine-outline",
       },
     ],

@@ -1,5 +1,5 @@
 <template>
-  <v-app class="ma-0 pa-0">
+  <v-main class="ma-0 pa-0">
     <div v-if="!$store.getters.darkMode" style="background: #d9d9d9">
       <div class="pt-5 d-flex justify-center px-16">
         <v-carousel
@@ -17,13 +17,15 @@
         </v-carousel>
       </div>
 
-      <div
+
+      <div v-if="$store.getters.currentLenguaje ==='es'">
+        <div
         class="pt-9 d-flex justify-center"
         v-for="(bodega, i) in bodegas"
         :key="i"
       >
         <v-card
-          height="230"
+          
           width="1600"
           class="rounded-lg"
           style="
@@ -68,6 +70,64 @@
           </div>
         </v-card>
       </div>
+      </div>
+
+      <div v-if="$store.getters.currentLenguaje ==='en'">
+        <div
+        class="pt-9 d-flex justify-center"
+        v-for="(bodega, i) in bodegas_en"
+        :key="i"
+      >
+        <v-card
+          
+          width="1600"
+          class="rounded-lg"
+          style="
+            background: #dedede;
+            box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
+          "
+        >
+          <div class="d-flex flex-no-wrap justify-space-between">
+            <v-avatar class="ma-3" size="200" tile>
+              <v-img :src="bodega.src" class="rounded-lg"></v-img>
+            </v-avatar>
+            <v-col cols="3"
+              ><div>
+                <v-card-title
+                  class="text-h5"
+                  v-text="bodega.nombre"
+                ></v-card-title>
+
+                <v-card-subtitle class="pb-0 body-1">{{
+                  bodega.localizacion
+                }}</v-card-subtitle>
+                <v-card-subtitle class="pt-0 body-1">{{
+                  bodega.provincia
+                }}</v-card-subtitle>
+
+                <v-card-actions class="ml-2">
+                  <div>
+                    <v-btn text class="custom_button" router to="/Tienda">
+                      visit
+                    </v-btn>
+                  </div>
+                </v-card-actions>
+              </div></v-col
+            >
+            <v-col>
+              <div>
+                <v-card-text class=" body-1">
+                  {{ bodega.descripcion }}
+                </v-card-text>
+              </div>
+            </v-col>
+          </div>
+        </v-card>
+      </div>
+      </div>
+      
+
+
     </div>
     <div v-if="$store.getters.darkMode" style="background: #292929;">
       <div class="pt-5 d-flex justify-center px-16">
@@ -91,7 +151,8 @@
         </v-carousel>
       </div>
 
-      <div
+      <div v-if="$store.getters.currentLenguaje ==='es'">
+        <div
         class="pt-9 d-flex justify-center"
         v-for="(bodega, i) in bodegas"
         :key="i"
@@ -142,10 +203,69 @@
           </div>
         </v-card>
       </div>
+      </div>
+
+      <div v-if="$store.getters.currentLenguaje ==='en'">
+        <div
+        class="pt-9 d-flex justify-center"
+        v-for="(bodega, i) in bodegas_en"
+        :key="i"
+      >
+        <v-card
+          height="230"
+          width="1600"
+          class="rounded-lg"
+          style="
+            background: #292929;
+            box-shadow:  5px 5px 10px #1a1a1a,-5px -5px 10px #383838;
+          "
+        >
+          <div class="d-flex flex-no-wrap justify-space-between">
+            <v-avatar class="ma-3" size="200" tile>
+              <v-img :src="bodega.src" class="rounded-lg"></v-img>
+            </v-avatar>
+            <v-col cols="3"
+              ><div>
+                <v-card-title
+                  class="text-h5 grey--text text--lighten-2"
+                  v-text="bodega.nombre"
+                ></v-card-title>
+
+                <v-card-subtitle class="pb-0 grey--text body-1">{{
+                  bodega.localizacion
+                }}</v-card-subtitle>
+                <v-card-subtitle class="pt-0 grey--text body-1">{{
+                  bodega.provincia
+                }}</v-card-subtitle>
+
+                <v-card-actions class="ml-2">
+                  <div>
+                    <v-btn text class="custom_buttonb grey--text" router to="/Tienda">
+                      visit
+                    </v-btn>
+                  </div>
+                </v-card-actions>
+              </div></v-col
+            >
+            <v-col>
+              <div>
+                <v-card-text class="body-1 grey--text text--lighten-1">
+                  {{ bodega.descripcion }}
+                </v-card-text>
+              </div>
+            </v-col>
+          </div>
+        </v-card>
+      </div>
+      </div>
+
+      
+
+
     </div>
 
     
-  </v-app>
+  </v-main>
 </template>
 
 <script>
@@ -221,6 +341,56 @@ export default {
         provincia: "Álava",
         descripcion:
           "Localizada en Villabuena de Álava, en el corazón de la Rioja Alavesa, se encuentra Bodegas Luis Cañas. Una bodega que se ha situado por méritos propios en la élite de la Denominación de Origen Calificada Rioja y en la que la viña es la protagonista indiscutible y clave en la calidad de sus vinos, disponiendo de un viñedo privilegiado. Bodegas Luis Cañas abre sus puertas a todo aquel que quiera conocer sus grandes caldos y su filosofía, desde el viñedo hasta la copa. Dispone de tienda, un Wine Bar para degustar aperitivos y vinos, sala de catas a pie de viña… Es un lugar perfecto para esos espíritus curiosos que desean vivir una experiencia completa descubriendo los secretos que esconden los grandes vinos.",
+      },
+    ],
+    bodegas_en: [
+      {
+        src: "https://images.squarespace-cdn.com/content/v1/5a86b05bcf81e0af04936cc7/1615546391879-0GO55P7LCOE6YYKRJQZW/bodegas-arguaza-navarro-2w.jpg?format=1000w",
+        nombre: "Arzuaga Navarro Winery",
+        localizacion: "Quintanilla de Onésimo",
+        provincia: "Valladolid",
+        descripcion:
+          "In the heart of the Ribera del Duero Denomination of Origin is one of the best wineries to visit in Spain: Arguaza Navarro. Located in the town of Quintanilla de Onésimo, this winery offers visitors everything they need to enjoy a wonderful stay and learn about the culture of wine. An extensive estate where the flora, fauna and, of course, the vineyards are the protagonists; two restaurants where you can enjoy the exquisite gastronomy of the area, a spa with exclusive wine therapy treatments, a cozy and comfortable hotel ideal for relaxing and various activities related to the world of wine. Ingredients that give rise to a fantastic wine tourism experience. Do you dare to enjoy it in first person?",
+      },
+      {
+        src: "https://images.squarespace-cdn.com/content/v1/5a86b05bcf81e0af04936cc7/1615546631262-ZHCBUSN7180F2CV9U6T8/mejores-bogegas-vivistar-espana-regina.jpg?format=1000w",
+        nombre: "Regina Viarum Winery",
+        localizacion: "Ribera Sacra",
+        provincia: "Lugo",
+        descripcion:
+          "In the heart of the Ribera Sacra is Bodegas Regina Viarum. A beautiful winery that overlooks the wonderful Sil Canyon, a wonderful natural enclave that frames it and is one of the best places to see in Galicia. The grapes with which they produce their wines, mainly mencia and godello, come from crops located on vertiginous levels that defy gravity and represent what is known as 'Heroic Viticulture'. All these factors make Regina Viarum one of the best wineries to visit in Spain and make it an essential visit to learn all the secrets of the elaboration of the wines of the Ribera Sacra Designation of Origin and the Heroic Viticulture.",
+      },
+      {
+        src: "https://images.squarespace-cdn.com/content/v1/5a86b05bcf81e0af04936cc7/1615803092379-2DD8W4FX2TDWW5WSVKWR/mejores-bodegas-visitar-espana-baigorri.jpg?format=1000w",
+        nombre: "BAIGORRI Winery",
+        localizacion: "Samaniego",
+        provincia: "Álava",
+        descripcion:
+          "In the town of Samaniego, in the shelter of the Sierra de Cantabria, is located Bodegas BAIGORRI, a glass box that fits perfectly with the environment that frames it. Designed by the architect Iñaki Aspiazu, it is oriented to the peculiar way of elaboration of its wines and a reference of architecture in the landscape respecting the environment where it is located. A building that adapts to the existing topography and harmoniously develops its entire program below the surface through its 7 subway floors. A place where you can contemplate from any point and in a didactic way, how the winemaking process takes place in the middle of the harvest. Undoubtedly, one of the best wineries to visit in Spain, where you can learn about a very special way of making wine. Do you dare to visit it?",
+      },
+      {
+        src: "https://images.squarespace-cdn.com/content/v1/5a86b05bcf81e0af04936cc7/1615808503353-1JO2TRNNF6RMTJO2OQNM/mejores-bodegas-visitar-espana-gran-bazan.jpg?format=1000w",
+        nombre: "GRANBAZÁN Winery",
+        localizacion: "Valle del Salnés",
+        provincia: "Pontevedra",
+        descripcion:
+          "Located in the Salnés Valley, in the heart of the Rías Baixas and only 3 kilometers from Cambados, is another of the best wineries to visit in Spain: Bodegas GRANBAZÁN. The winery is half-buried and is neoclassical style with influence of French Chateau and covered with blue tiles in a nod to the Galician Indian houses. Its plantation extends over an estate with 14 hectares of vineyard for which the vine system is used, so typical of the Rías Baixas and of the Albariño grape. It offers a wide range of wine tourism possibilities to approach the world of wine and relax while strolling through the vineyard or discovering the relevance of the winery as a pioneer in the production of its wines. In addition, it offers visitors a wide range of options to enjoy the fusion between oenology and the exquisite Galician gastronomy. What more could you ask for?",
+      },
+      {
+        src: "https://images.squarespace-cdn.com/content/v1/5a86b05bcf81e0af04936cc7/1615818826889-55X8XH2BAATB6SXRYR5N/mejores-bodegas-visitar-espana-berroja.jpg?format=1000w",
+        nombre: "Berroja Winery",
+        localizacion: "Urdaibai Biosphere Reserve",
+        provincia: "Bizkaia",
+        descripcion:
+          "Framed by the wonderful Urdaibai Biosphere Reserve is Bodega Berroja. The uniqueness and beauty of the surrounding landscape make it one of the best wineries to visit in Spain. Its building, half buried, is perfectly integrated with the environment, respecting the natural and rural environment and offering magnificent views of Urdaibai. It has an extensive mountain vineyard, with terraced areas, from which the grapes used to produce different types of artisanal Txakoli are grown. Bodega Berroja offers multiple wine tourism and enogastronomic activities, through which you can learn more about the elaboration of its Txakolis, with Denomination of Origin Bizkaiko Txakolina, and enjoy its flavors and the gastronomy of the area. A unique environment, an exquisite gastronomy, wonderful views and an artisanal Txakoli, it is clear that visiting it is worth it!",
+      },
+      {
+        src: "https://images.squarespace-cdn.com/content/v1/5a86b05bcf81e0af04936cc7/1615897575268-L4E80XYPCU3BX1SWW1N5/mejores-bodegas-visitar-espana-luis.jpg?format=1000w",
+        nombre: "Luis Cañas Winery",
+        localizacion: "Villabuena de Álava",
+        provincia: "Álava",
+        descripcion:
+          "Located in Villabuena de Álava, in the heart of the Rioja Alavesa, is Bodegas Luis Cañas. A winery that has positioned itself on its own merits in the elite of the Rioja Qualified Designation of Origin and in which the vineyard is the undisputed protagonist and key to the quality of its wines, having a privileged vineyard. Bodegas Luis Cañas opens its doors to anyone who wants to know its great wines and its philosophy, from the vineyard to the glass. It has a store, a Wine Bar to taste appetizers and wines, a tasting room at the foot of the vineyard... It is a perfect place for those curious spirits who want to live a complete experience discovering the secrets that hide the great wines.",
       },
     ],
   }),

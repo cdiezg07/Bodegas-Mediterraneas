@@ -26,7 +26,8 @@
 
       <v-card-text>
         <v-row no-gutters>
-          <v-col :cols="1 === 1 ? 3 : 8">
+
+          <v-col :cols="1 === 1 ? 3 : 8" v-if="$store.getters.currentLenguaje ==='es'">
             <v-btn v-if="!editando" class="ma-2 custom_button" color="primary" text @click="editando = !editando">
               Editar Perfil
               <v-icon right> mdi-account-edit </v-icon>
@@ -42,6 +43,25 @@
               <v-icon right> mdi-check-bold </v-icon>
             </v-btn>
           </v-col>
+
+          <v-col :cols="1 === 1 ? 3 : 8" v-if="$store.getters.currentLenguaje ==='en'">
+            <v-btn v-if="!editando" class="ma-2 custom_button" color="primary" text @click="editando = !editando">
+              Edit Profile
+              <v-icon right> mdi-account-edit </v-icon>
+            </v-btn>
+
+            <v-btn v-if="!editando" class="ma-2 custom_button" color="red" text @click="dialog = !dialog">
+              Delete Account
+              <v-icon right> mdi-delete-forever </v-icon>
+            </v-btn>
+
+            <v-btn v-if="editando" class="ma-2 custom_button" color="green" text @click="editando = !editando">
+              Aply changes
+              <v-icon right> mdi-check-bold </v-icon>
+            </v-btn>
+          </v-col>
+
+
           <v-col :cols="2 === 1 ? 3 : 8">
 
 
@@ -62,7 +82,8 @@
                         
                     "
                   >
-                    <v-card-title class="pl-4">Dirección</v-card-title>
+                    <v-card-title class="pl-4" v-if="$store.getters.currentLenguaje ==='es'">Dirección</v-card-title>
+                    <v-card-title class="pl-4" v-if="$store.getters.currentLenguaje ==='en'">Address</v-card-title>
                     <v-card-subtitle class="pl-10">
                       <br />
                       <p>
@@ -79,7 +100,8 @@
                         
                     "
                   >
-                    <v-card-title class="pl-4">Número de Teléfono</v-card-title>
+                    <v-card-title class="pl-4" v-if="$store.getters.currentLenguaje ==='es'">Número de Teléfono</v-card-title>
+                    <v-card-title class="pl-4" v-if="$store.getters.currentLenguaje ==='en'">Phone Number</v-card-title>
                     <v-card-subtitle class="pl-10">
                       <br />
                       <p>
@@ -95,8 +117,11 @@
                         
                     "
                   >
-                    <v-card-title class="pl-4"
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4"
                       >Fecha de Nacimiento</v-card-title
+                    >
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4"
+                      >Date of birth</v-card-title
                     >
                     <v-card-subtitle class="pl-10">
                       <br />
@@ -115,7 +140,8 @@
                         
                     "
                   >
-                    <v-card-title class="pl-4">Correo Electrónico</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4">Correo Electrónico</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4">E-mail</v-card-title>
                     <v-card-subtitle class="pl-10">
                       <br />
                       <p>
@@ -131,7 +157,8 @@
                         
                     "
                   >
-                    <v-card-title class="pl-4">Tarjeta de Crédito</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4">Tarjeta de Crédito</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4">Credit card</v-card-title>
                     <v-card-subtitle class="pl-10">
                       <br />
                       <p>
@@ -149,7 +176,8 @@
                         
                     "
                   >
-                    <v-card-title class="pl-4">DNI</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4">DNI</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4">ID</v-card-title>
                     <v-card-subtitle class="pl-10">
                       <br />
                       <p>
@@ -194,7 +222,8 @@
                         
                     "
                   >
-                    <v-card-title class="pl-4 pb-0">Dirección</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 pb-0">Dirección</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 pb-0">Address</v-card-title>
                     <v-card-subtitle class="pl-10 pb-0">
                       <br />
                       <v-form>
@@ -214,7 +243,8 @@
                         
                     "
                   >
-                    <v-card-title class="pl-4 pb-0">Número de Teléfono</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 pb-0">Número de Teléfono</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 pb-0">Phone Number</v-card-title>
                     <v-card-subtitle class="pl-10 pb-0">
                       <br />
                       <v-form>
@@ -233,8 +263,11 @@
                         
                     "
                   >
-                    <v-card-title class="pl-4"
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4"
                       >Fecha de Nacimiento</v-card-title
+                    >
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4"
+                      >Date of birth</v-card-title
                     >
                     <v-card-subtitle class="pl-10">
                       <br />
@@ -254,7 +287,8 @@
                         
                     "
                   >
-                    <v-card-title class="pl-4 pb-0">Correo Electrónico</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 pb-0">Correo Electrónico</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 pb-0">E-mail</v-card-title>
                     <v-card-subtitle class="pl-10 pb-0">
                       <br />
                       <v-form>
@@ -273,7 +307,9 @@
                         
                     "
                   >
-                    <v-card-title class="pl-4 pb-0">Tarjeta de Crédito</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 pb-0">Tarjeta de Crédito</v-card-title>
+                  
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 pb-0">Credit card</v-card-title>
                     <v-card-subtitle class="pl-10 pb-0">
                       <br />
                       <v-form>
@@ -296,7 +332,8 @@
                         
                     "
                   >
-                    <v-card-title class="pl-4 pb-0">DNI</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 pb-0">DNI</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 pb-0">ID</v-card-title>
                     <v-file-input
                     show-size
                     counter
@@ -368,7 +405,8 @@
 
       <v-card-text>
         <v-row no-gutters>
-          <v-col :cols="1 === 1 ? 3 : 8">
+
+          <v-col :cols="1 === 1 ? 3 : 8" v-if="$store.getters.currentLenguaje ==='es'">
             <v-btn v-if="!editando" class="ma-2 custom_buttonb" color="primary" text @click="editando = !editando">
               Editar Perfil
               <v-icon right> mdi-account-edit </v-icon>
@@ -383,6 +421,25 @@
               <v-icon right> mdi-check-bold </v-icon>
             </v-btn>
           </v-col>
+
+
+
+          <v-col :cols="1 === 1 ? 3 : 8" v-if="$store.getters.currentLenguaje ==='en'">
+            <v-btn v-if="!editando" class="ma-2 custom_buttonb" color="primary" text @click="editando = !editando">
+              Edit Profile
+              <v-icon right> mdi-account-edit </v-icon>
+            </v-btn>
+
+            <v-btn v-if="!editando" class="ma-2 custom_buttonb" color="red" text @click="dialog = !dialog">
+              Delete account
+              <v-icon right> mdi-delete-forever </v-icon>
+            </v-btn>
+            <v-btn v-if="editando" class="ma-2 custom_buttonb" color="green" text @click="editando = !editando">
+              Apply changes
+              <v-icon right> mdi-check-bold </v-icon>
+            </v-btn>
+          </v-col>
+
           <v-col :cols="2 === 1 ? 3 : 8">
             <v-card v-if="!editando"
               class="rounded-lg mb-5 ml-3"
@@ -400,7 +457,8 @@
                       box-shadow: inset 6px 6px 12px #1a1a1a,inset -6px -6px 12px #383838;           
                     "
                   >
-                    <v-card-title class="pl-4 grey--text text--lighten-1">Dirección</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 grey--text text--lighten-1">Dirección</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 grey--text text--lighten-1">Address</v-card-title>
                     <v-card-subtitle class="pl-10 grey--text">
                       <br />
                       <p>
@@ -416,7 +474,8 @@
                       box-shadow: inset 6px 6px 12px #1a1a1a,inset -6px -6px 12px #383838;           
                     "
                   >
-                    <v-card-title class="pl-4 grey--text text--lighten-1">Número de Teléfono</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 grey--text text--lighten-1">Número de Teléfono</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 grey--text text--lighten-1">Phone Number</v-card-title>
                     <v-card-subtitle class="pl-10 grey--text">
                       <br />
                       <p>
@@ -431,8 +490,11 @@
                       box-shadow: inset 6px 6px 12px #1a1a1a,inset -6px -6px 12px #383838;           
                     "
                   >
-                    <v-card-title class="pl-4 grey--text text--lighten-1"
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 grey--text text--lighten-1"
                       >Fecha de Nacimiento</v-card-title
+                    >
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 grey--text text--lighten-1"
+                      >Date of birth</v-card-title
                     >
                     <v-card-subtitle class="pl-10 grey--text">
                       <br />
@@ -450,7 +512,8 @@
                       box-shadow: inset 6px 6px 12px #1a1a1a,inset -6px -6px 12px #383838;           
                     "
                   >
-                    <v-card-title class="pl-4 grey--text text--lighten-1">Correo Electrónico</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 grey--text text--lighten-1">Correo Electrónico</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 grey--text text--lighten-1">E-mail</v-card-title>
                     <v-card-subtitle class="pl-10 grey--text">
                       <br />
                       <p>
@@ -465,7 +528,8 @@
                       box-shadow: inset 6px 6px 12px #1a1a1a,inset -6px -6px 12px #383838;           
                     "
                   >
-                    <v-card-title class="pl-4 grey--text text--lighten-1">Tarjeta de Crédito</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 grey--text text--lighten-1">Tarjeta de Crédito</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 grey--text text--lighten-1">Credit card</v-card-title>
                     <v-card-subtitle class="pl-10 grey--text">
                       <br />
                       <p>
@@ -482,7 +546,8 @@
                       box-shadow: inset 6px 6px 12px #1a1a1a,inset -6px -6px 12px #383838;           
                     "
                   >
-                    <v-card-title class="pl-4 grey--text text--lighten-1">DNI</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 grey--text text--lighten-1">DNI</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 grey--text text--lighten-1">ID</v-card-title>
                     <v-card-subtitle class="pl-10">
                       <br />
                       <p>
@@ -508,6 +573,7 @@
                   </div>
                 </v-col>
               </v-row>
+
             </v-card>
             <v-card v-if="editando"
               class="rounded-lg mb-5 ml-3"
@@ -525,7 +591,8 @@
                       box-shadow: inset 6px 6px 12px #1a1a1a,inset -6px -6px 12px #383838;           
                     "
                   >
-                    <v-card-title class="pl-4 pb-0 grey--text text--lighten-1">Dirección</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 pb-0 grey--text text--lighten-1">Dirección</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 pb-0 grey--text text--lighten-1">Address</v-card-title>
                     <v-card-subtitle class="pl-10 pb-0 grey--text">
                       <br />
                       <v-form>
@@ -544,7 +611,8 @@
                       box-shadow: inset 6px 6px 12px #1a1a1a,inset -6px -6px 12px #383838;           
                     "
                   >
-                    <v-card-title class="pl-4 pb-0  grey--text text--lighten-1">Número de Teléfono</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 pb-0  grey--text text--lighten-1">Número de Teléfono</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 pb-0  grey--text text--lighten-1">Phone Number</v-card-title>
                     <v-card-subtitle class="pl-10  pb-0 grey--text">
                       <br />
                       <v-form>
@@ -562,8 +630,11 @@
                       box-shadow: inset 6px 6px 12px #1a1a1a,inset -6px -6px 12px #383838;           
                     "
                   >
-                    <v-card-title class="pl-4 grey--text text--lighten-1"
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 grey--text text--lighten-1"
                       >Fecha de Nacimiento</v-card-title
+                    >
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 grey--text text--lighten-1"
+                      >Date of birth</v-card-title
                     >
                     <v-card-subtitle class="pl-10 grey--text">
                       <br />
@@ -581,7 +652,8 @@
                       box-shadow: inset 6px 6px 12px #1a1a1a,inset -6px -6px 12px #383838;           
                     "
                   >
-                    <v-card-title class="pl-4  pb-0 grey--text text--lighten-1">Correo Electrónico</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4  pb-0 grey--text text--lighten-1">Correo Electrónico</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4  pb-0 grey--text text--lighten-1">E-mail</v-card-title>
                     <v-card-subtitle class="pl-10  pb-0 grey--text">
                       <br />
                       <v-form>
@@ -599,7 +671,8 @@
                       box-shadow: inset 6px 6px 12px #1a1a1a,inset -6px -6px 12px #383838;           
                     "
                   >
-                    <v-card-title class="pl-4 pb-0 grey--text text--lighten-1">Tarjeta de Crédito</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 pb-0 grey--text text--lighten-1">Tarjeta de Crédito</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 pb-0 grey--text text--lighten-1">Credit card</v-card-title>
                     <v-card-subtitle class="pl-10  pb-0  grey--text">
                       <br />
                       <v-form>
@@ -622,7 +695,8 @@
                       box-shadow: inset 6px 6px 12px #1a1a1a,inset -6px -6px 12px #383838;           
                     "
                   >
-                    <v-card-title class="pl-4 pb-0 grey--text text--lighten-1">DNI</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="pl-4 pb-0 grey--text text--lighten-1">DNI</v-card-title>
+                    <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="pl-4 pb-0 grey--text text--lighten-1">ID</v-card-title>
                     <v-file-input
                     show-size
                     counter
@@ -672,10 +746,14 @@
     >
       <v-card v-if="!$store.getters.darkMode" style="background: #dedede; box-shadow: 5px 5px 10px #b4b4b4, -5px -5px 10px #ffffff;
       ">
-        <v-card-title class="text-h5">
+        <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="text-h5">
           Eliminar cuenta
         </v-card-title>
-        <v-card-text class="body-1">¿Está seguro de que quiere eliminar la cuenta del sitio?</v-card-text>
+        <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="text-h5">
+          Delete Account
+        </v-card-title>
+        <v-card-text v-if="$store.getters.currentLenguaje ==='es'" class="body-1">¿Está seguro de que quiere eliminar la cuenta del sitio?</v-card-text>
+        <v-card-text v-if="$store.getters.currentLenguaje ==='en'" class="body-1">Are you sure you want to delete the account from the site?</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
@@ -686,13 +764,21 @@
           >
             No
           </v-btn>
-          <v-btn 
+          <v-btn  v-if="$store.getters.currentLenguaje ==='es'"
             color="green darken-1"
             class="custom_button"
             text
             @click="dialog = false"
           >
             Sí
+          </v-btn>
+          <v-btn  v-if="$store.getters.currentLenguaje ==='en'"
+            color="green darken-1"
+            class="custom_button"
+            text
+            @click="dialog = false"
+          >
+            Yes
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -702,10 +788,14 @@
         background: #292929;
         box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #383838;      
       ">
-        <v-card-title class="text-h5 grey--text text--lighten-2">
+        <v-card-title v-if="$store.getters.currentLenguaje ==='es'" class="text-h5 grey--text text--lighten-2">
           Eliminar cuenta
         </v-card-title>
-        <v-card-text class="body-1 grey--text ">¿Está seguro de que quiere eliminar la cuenta del sitio?</v-card-text>
+        <v-card-title v-if="$store.getters.currentLenguaje ==='en'" class="text-h5 grey--text text--lighten-2">
+          Delete Account
+        </v-card-title>
+        <v-card-text v-if="$store.getters.currentLenguaje ==='es'" class="body-1 grey--text ">¿Está seguro de que quiere eliminar la cuenta del sitio?</v-card-text>
+        <v-card-text v-if="$store.getters.currentLenguaje ==='en'" class="body-1 grey--text ">Are you sure you want to delete the account from the site?</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
@@ -716,13 +806,21 @@
           >
             No
           </v-btn>
-          <v-btn 
+          <v-btn  v-if="$store.getters.currentLenguaje ==='es'"
             color="green darken-1"
             class="custom_buttonb"
             text
             @click="dialog = false"
           >
             Sí
+          </v-btn>
+          <v-btn  v-if="$store.getters.currentLenguaje ==='en'"
+            color="green darken-1"
+            class="custom_buttonb"
+            text
+            @click="dialog = false"
+          >
+            Yes
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -746,10 +844,10 @@ export default {
     numTel: "+34 668001122",
     fechNac: "14 Febrero 1990",
     corrElec: "rolopsuar@gmail.com",
-    tarjCred: "MasterCard que termina en ****4444",
+    tarjCred: "MasterCard: ****4444",
     tarjCredEd: "***************4444",
-    caducidad: "Fecha Vencimiento 08/21",
-    caducidadEd: "08/21",
+    caducidad: "08/22",
+    caducidadEd: "08/22",
     dni: "",
     editando: false,
   }),

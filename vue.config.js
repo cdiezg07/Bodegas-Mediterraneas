@@ -1,4 +1,4 @@
 module.exports = {
-  //publicPath: "/bodegas-mediterraneas",
+  publicPath: "/bodegas-mediterraneas",
   transpileDependencies: ["vuetify"],
 };
