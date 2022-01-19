@@ -59,14 +59,35 @@
                       </v-col>
                       <v-col md="2">
                         <div class="pt-16">
-                          <v-btn
-                            color="red lighten-1 "
-                            class="custom_button"
-                            text
-                            @click="dialog = false"
-                          >
-                            <v-icon> mdi-delete-forever </v-icon>
-                          </v-btn>
+                          <v-tooltip v-if="$store.getters.currentLenguaje ==='es'" bottom>
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-btn
+                                color="red lighten-1 "
+                                text
+                                class="custom_button"
+                                v-bind="attrs"
+                                v-on="on"
+                              >
+                                <v-icon> mdi-delete-forever </v-icon>
+                              </v-btn>
+                            </template>
+                            <span>Eliminar producto</span>
+                          </v-tooltip>
+                          <v-tooltip v-if="$store.getters.currentLenguaje ==='en'" bottom>
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-btn
+                                color="red lighten-1 "
+                                text
+                                class="custom_button"
+                                v-bind="attrs"
+                                v-on="on"
+                              >
+                                <v-icon> mdi-delete-forever </v-icon>
+                              </v-btn>
+                            </template>
+                            <span>Delete item</span>
+                          </v-tooltip>
+                          
                         </div>
                       </v-col>
                     </v-row>
@@ -327,14 +348,34 @@
                       </v-col>
                       <v-col md="2">
                         <div class="pt-16">
-                          <v-btn
-                            color="red lighten-1 "
-                            class="custom_buttonb"
-                            text
-                            @click="dialog = false"
-                          >
-                            <v-icon> mdi-delete-forever </v-icon>
-                          </v-btn>
+                          <v-tooltip v-if="$store.getters.currentLenguaje ==='es'" bottom>
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-btn
+                                color="red lighten-1 "
+                                text
+                                class="custom_buttonb"
+                                v-bind="attrs"
+                                v-on="on"
+                              >
+                                <v-icon> mdi-delete-forever </v-icon>
+                              </v-btn>
+                            </template>
+                            <span>Eliminar producto</span>
+                          </v-tooltip>
+                          <v-tooltip v-if="$store.getters.currentLenguaje ==='en'" bottom>
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-btn
+                                color="red lighten-1 "
+                                text
+                                class="custom_buttonb"
+                                v-bind="attrs"
+                                v-on="on"
+                              >
+                                <v-icon> mdi-delete-forever </v-icon>
+                              </v-btn>
+                            </template>
+                            <span>Delete item</span>
+                          </v-tooltip>
                         </div>
                       </v-col>
                     </v-row>
