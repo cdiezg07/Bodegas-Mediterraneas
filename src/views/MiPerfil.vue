@@ -33,7 +33,7 @@
               <v-icon right> mdi-account-edit </v-icon>
             </v-btn>
 
-            <v-btn v-if="!editando" class="ma-2 custom_button" color="red" text @click="dialog = !dialog">
+            <v-btn v-if="!editando" class="ma-2 mr-3 custom_button" color="red" text @click="dialog = !dialog">
               Eliminar Cuenta
               <v-icon right> mdi-delete-forever </v-icon>
             </v-btn>
@@ -412,7 +412,7 @@
               <v-icon right> mdi-account-edit </v-icon>
             </v-btn>
 
-            <v-btn v-if="!editando" class="ma-2 custom_buttonb" color="red" text @click="dialog = !dialog">
+            <v-btn v-if="!editando" class="ma-2 mr-3 custom_buttonb" color="red" text @click="dialog = !dialog">
               Eliminar Cuenta
               <v-icon right> mdi-delete-forever </v-icon>
             </v-btn>

@@ -135,7 +135,7 @@
             </v-avatar>
           </div>
           <div class="pl-7 grey--text">
-            <div><h1>Pedro</h1></div>
+            <div><h1>Rodrigo</h1></div>
             <div><h2>López Suarez</h2></div>
           </div>
         </v-card>
