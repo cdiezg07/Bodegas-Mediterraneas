@@ -113,11 +113,13 @@
                   label="Dirección de envío"
                   prepend-icon="mdi-account-circle"
                   type="text"
+                  :rules="[rules.required, rules.counter]"
                 />
                 <v-text-field
                   label="Código postal"
                   prepend-icon="mdi-account-circle"
                   type="text"
+                  :rules="[rules.required, rules.counter]"
                 />
                 <v-text-field
                   label="Tarjeta de crédito"
@@ -203,11 +205,13 @@
                   label="Shipping address"
                   prepend-icon="mdi-account-circle"
                   type="text"
+                  :rules="[rules.required, rules.counter]"
                 />
                 <v-text-field
                   label="Zip Code"
                   prepend-icon="mdi-account-circle"
                   type="text"
+                  :rules="[rules.required, rules.counter]"
                 />
                 <v-text-field
                   label="Credit card"
@@ -401,12 +405,14 @@
                   label="Dirección de envío"
                   prepend-icon="mdi-account-circle"
                   type="text"
+                  :rules="[rules.required, rules.counter]"
                   dark
                 />
                 <v-text-field
                   label="Código postal"
                   prepend-icon="mdi-account-circle"
                   type="text"
+                  :rules="[rules.required, rules.counter]"
                   dark
                 />
                 <v-text-field
@@ -496,12 +502,14 @@
                   label="Shipping address"
                   prepend-icon="mdi-account-circle"
                   type="text"
+                  :rules="[rules.required, rules.counter]"
                   dark
                 />
                 <v-text-field
                   label="Zip Code"
                   prepend-icon="mdi-account-circle"
                   type="text"
+                  :rules="[rules.required, rules.counter]"
                   dark
                 />
                 <v-text-field
@@ -622,6 +630,9 @@ export default {
         cantidad: "1",
       },
     ],
+    rules: {
+        required: (value) => !!value || "Required.",
+      },
   }),
   methods: {
     print: function () {
